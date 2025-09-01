@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Estilos padre -->
+    <style name="parent">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/white</item>
+    </style>
+
+    <!-- Contenedor del login -->
+    <style name="loginParent" parent="parent">
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@color/fondo</item>
+        <item name="android:focusableInTouchMode">true</item>
+        <item name="android:padding">24dp</item>
+    </style>
+
+    <!-- Texto del header -->
+    <style name="headerText" parent="parent">
+
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">@color/fdark</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginTop">40dp</item>
+    </style>
+
+    <!-- Botones -->
+    <style name="loginButton" parent="parent">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:color">@color/fdark</item>"
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:padding">12dp</item>
+        <item name="android:textColor">@color/fdark</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
+    </style>
+</resources>

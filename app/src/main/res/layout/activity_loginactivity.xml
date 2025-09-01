@@ -1,37 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="24dp"
-    android:gravity="center">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/loginParent">
 
-    <EditText
-        android:id="@+id/etUsuario"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Usuario" />
+    <ScrollView
+        style="@style/parent">
 
-    <EditText
-        android:id="@+id/etPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Contraseña"
-        android:inputType="textPassword"
-        android:layout_marginTop="12dp"/>
+        <RelativeLayout
+            style="@style/parent">
 
-    <Button
-        android:id="@+id/btnIngresar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Ingresar"
-        android:layout_marginTop="16dp"/>
+            <!-- Fondo con imagen superior -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:orientation="vertical"
+                android:weightSum="12">
 
-    <Button
-        android:id="@+id/btnRegistrar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Registrarse"
-        android:layout_marginTop="8dp"/>
+                <LinearLayout
+                    style="@style/parent"
+                    android:orientation="vertical"
+                    android:layout_weight="3">
+                </LinearLayout>
+            </LinearLayout>
 
-</LinearLayout>
+            <!-- Contenido principal del login -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:orientation="vertical"
+                android:layout_marginTop="60dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginLeft="30dp">
+
+                <!-- Título -->
+                <TextView
+                    style="@style/headerText"
+                    android:layout_gravity="center"
+                    android:text=" Iniciar Sesión"
+                    android:textSize="26sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="40dp"
+                    />
+
+                <!-- Campo Usuario -->
+                    <EditText
+                    android:id="@+id/layoutUsuario"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                        android:hint="Usuario o correo electronico"
+                        android:textColorHint="@color/fdark"
+                        android:inputType="textEmailAddress"/>
+
+
+                <!-- Campo Contraseña -->
+                <EditText
+                    android:id="@+id/layoutPassword"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:hint="Contraseña"
+                    android:textColorHint="@color/fdark"
+                    android:inputType="textPassword"/>
++
+
+                <!-- Botón Ingresar -->
+                <Button
+                    android:id="@+id/btnIngresar"
+                    style="@style/loginButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Ingresar"
+                    android:textAllCaps="false"
+
+                    android:layout_marginTop="24dp"/>
+
+                <!-- Botón Registrarse -->
+                <TextView
+                    android:id="@+id/txtRegistrar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:text="¿No tienes cuenta? Regístrate"
+                    android:textAlignment="center"
+                    android:textColor="@color/azul_marino"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>
+
