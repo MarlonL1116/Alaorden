@@ -3,6 +3,7 @@ package com.example.alaorden
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
 class LoginActivity : AppCompatActivity() {
@@ -11,7 +12,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_loginactivity)
 
         val btnIngresar = findViewById<Button>(R.id.btnIngresar)
-        val btnRegistrar = findViewById<Button>(R.id.btnRegistrar)
+        val btnRegistrar = findViewById<TextView>(R.id.txtRegistrar)
 
         // Ir a MainActivity (pantalla principal) al ingresar
         btnIngresar.setOnClickListener {

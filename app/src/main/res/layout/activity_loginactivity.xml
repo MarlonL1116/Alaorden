@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     style="@style/loginParent">
 
     <ScrollView
@@ -46,20 +45,22 @@
 
                 <!-- Campo Usuario -->
                     <EditText
-                    android:id="@+id/layoutUsuario"
+                        android:textColor="@color/black"
+                        android:id="@+id/layoutUsuario"
                     style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
-                        android:hint="Usuario o correo electronico"
-                        android:textColorHint="@color/fdark"
-                        android:inputType="textEmailAddress"/>
+                    android:hint="Usuario o correo electronico"
+                    android:textColorHint="@color/fdark"
+                    android:inputType="textEmailAddress" />
 
 
                 <!-- Campo Contraseña -->
                 <EditText
                     android:id="@+id/layoutPassword"
                     style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                    android:textColor="@color/black"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -76,7 +77,6 @@
                     android:layout_height="wrap_content"
                     android:text="Ingresar"
                     android:textAllCaps="false"
-
                     android:layout_marginTop="24dp"/>
 
                 <!-- Botón Registrarse -->
