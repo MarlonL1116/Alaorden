@@ -1,101 +1,81 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/loginParent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/card"
+    tools:context=".LoginActivity">
 
-    <ScrollView
-        style="@style/parent">
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="24dp"
+        android:layout_centerInParent="true"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="8dp">
 
-        <RelativeLayout
-            style="@style/parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp">
 
-            <!-- Fondo con imagen superior -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_alignParentTop="true"
-                android:orientation="vertical"
-                android:weightSum="12">
+            <!-- Título -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="INICIAR SESION"
+                android:textColor="@color/Primario"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:layout_gravity="center"/>
 
-                <LinearLayout
-                    style="@style/parent"
-                    android:orientation="vertical"
-                    android:layout_weight="3">
-                </LinearLayout>
-            </LinearLayout>
-
-            <!-- Contenido principal del login -->
-            <LinearLayout
+            <!-- Usuario -->
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:orientation="vertical"
-                android:layout_marginTop="60dp"
-                android:layout_marginRight="30dp"
-                android:layout_marginLeft="30dp">
+                android:hint="Usuario o correo electrónico">
 
-                <!-- Título -->
-                <TextView
-                    style="@style/headerText"
-                    android:layout_gravity="center"
-                    android:text=" Iniciar Sesión"
-                    android:textSize="26sp"
-                    android:textStyle="bold"
-                    android:layout_marginTop="40dp"
-                    />
-
-                <!-- Campo Usuario -->
-                    <EditText
-                        android:textColor="@color/black"
-                        android:id="@+id/layoutUsuario"
-                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:hint="Usuario o correo electronico"
-                    android:textColorHint="@color/fdark"
-                    android:inputType="textEmailAddress" />
+                    android:inputType="textEmailAddress"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
+            <!-- Contraseña -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Contraseña"
+                app:endIconMode="password_toggle">
 
-                <!-- Campo Contraseña -->
-                <EditText
-                    android:id="@+id/layoutPassword"
-                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-                    android:textColor="@color/black"
+                <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:hint="Contraseña"
-                    android:textColorHint="@color/fdark"
                     android:inputType="textPassword"/>
-+
+            </com.google.android.material.textfield.TextInputLayout>
 
-                <!-- Botón Ingresar -->
-                <Button
-                    android:id="@+id/btnIngresar"
-                    style="@style/loginButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Ingresar"
-                    android:textAllCaps="false"
-                    android:layout_marginTop="24dp"/>
+            <!-- Botón LOGIN -->
+            <Button
+                android:id="@+id/btnIngresar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="INGRESAR"
+                android:textAllCaps="true"
+                android:background="@drawable/botondegradado"
+                android:textColor="@android:color/white"
+                android:layout_marginTop="16dp"/>
 
-                <!-- Botón Registrarse -->
-                <TextView
-                    android:id="@+id/txtRegistrar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:text="¿No tienes cuenta? Regístrate"
-                    android:textAlignment="center"
-                    android:textColor="@color/azul_marino"
-                    android:textSize="12sp" />
-
-            </LinearLayout>
-
-        </RelativeLayout>
-    </ScrollView>
-
+            <!-- Enlace Registrarse -->
+            <TextView
+                android:id="@+id/txtRegistrar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="¿No tienes cuenta? Regístrate"
+                android:textColor="@color/linkColor"
+                android:textSize="14sp"
+                android:layout_marginTop="12dp"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 </RelativeLayout>
-

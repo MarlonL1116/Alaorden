@@ -1,21 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:padding="24dp">
+    android:background="@color/Primario">
 
-    <Button
-        android:id="@+id/btnRestaurants"
+    <!-- Contenedor de cards -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:padding="30dp">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:weightSum="2">
+
+            <!-- Card Restaurantes -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardRestaurants"
+                android:layout_width="0dp"
+                android:layout_height="200"
+                android:layout_weight="1"
+                android:layout_margin="8dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="6dp">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:contentDescription="Restaurantes"
+                         />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Restaurantes"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/Secundario"
+                        android:layout_marginTop="8dp" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Card Tiendas -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardStore"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:layout_weight="1"
+                android:layout_margin="8dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="6dp">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:contentDescription="Tienda"
+                         />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tiendas"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/Secundario"
+                        android:layout_marginTop="8dp" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Barra inferior -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Restaurants" />
+        android:background="@color/white"
+        app:itemIconTint="@color/Primario"
+        app:itemTextColor="@color/PrimarioOscuro"
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/barramenu"/>
 
-    <Button
-        android:id="@+id/btnStores"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Tiendas"
-        android:layout_marginTop="16dp"/>
+
 </LinearLayout>
+

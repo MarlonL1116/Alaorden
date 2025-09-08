@@ -14,6 +14,7 @@ class LoginActivity : AppCompatActivity() {
         val btnIngresar = findViewById<Button>(R.id.btnIngresar)
         val btnRegistrar = findViewById<TextView>(R.id.txtRegistrar)
 
+
         // Ir a MainActivity (pantalla principal) al ingresar
         btnIngresar.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
@@ -26,5 +27,6 @@ class LoginActivity : AppCompatActivity() {
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
         }
+
     }
 }

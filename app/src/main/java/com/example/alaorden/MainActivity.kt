@@ -1,9 +1,11 @@
 package com.example.alaorden
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
+
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 
 
 class MainActivity : AppCompatActivity() {
@@ -12,8 +14,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         // Referencias a los botones
-        val btnRestaurants = findViewById<Button>(R.id.btnRestaurants)
-        val btnStores = findViewById<Button>(R.id.btnStores)
+        val btnRestaurants = findViewById<CardView>(R.id.cardRestaurants)
+        val btnStores = findViewById<CardView>(R.id.cardStore)
 
         // Acción al dar clic en Restaurants
         btnRestaurants.setOnClickListener {
