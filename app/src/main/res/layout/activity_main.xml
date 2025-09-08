@@ -24,7 +24,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardRestaurants"
                 android:layout_width="0dp"
-                android:layout_height="200"
+                android:layout_height="200dp"
                 android:layout_weight="1"
                 android:layout_margin="8dp"
                 app:cardCornerRadius="16dp"
