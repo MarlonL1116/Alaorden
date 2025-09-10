@@ -12,9 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ALaOrden">
 
-        <activity android:name=".RestaurantsActivity" />
-        <activity android:name=".StoresActivity" />
+
         <activity android:name=".RegisterActivity" />
+
+
 
         <!-- AHORA LoginActivity es la inicial -->
         <activity
@@ -29,6 +30,10 @@
         </activity>
 
         <activity android:name=".MainActivity" />
+
+        <activity android:name=".ProductosActivity" />
+        <activity android:name=".PerfilActivity" />
+        <activity android:name=".CarritoActivity" />
 
     </application>
 </manifest>
