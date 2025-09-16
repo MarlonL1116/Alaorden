@@ -17,11 +17,10 @@ class CarritoAdapter(
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val txtNombre: TextView = itemView.findViewById(R.id.txtNombreCarrito)
-        val txtPrecioUnit: TextView = itemView.findViewById(R.id.txtPrecioUnitarioCarrito)
-        val btnMinus: Button = itemView.findViewById(R.id.btnMinusCarrito)
         val txtCantidad: TextView = itemView.findViewById(R.id.txtCantidadCarrito)
+        val txtSubtotal: TextView = itemView.findViewById(R.id.txtSubtotalCarrito) // 👈 asegúrate que existe en item_carrito.xml
+        val btnMinus: Button = itemView.findViewById(R.id.btnMinusCarrito)
         val btnPlus: Button = itemView.findViewById(R.id.btnPlusCarrito)
-        val txtSubtotal: TextView = itemView.findViewById(R.id.txtSubtotalCarrito)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -36,9 +35,11 @@ class CarritoAdapter(
         val cantidad = producto.cantidad
 
         holder.txtNombre.text = producto.nombre ?: "Producto"
-        holder.txtPrecioUnit.text = "S/. ${"%.2f".format(precioUnitario)}"
-        holder.txtCantidad.text = cantidad.toString()
-        holder.txtSubtotal.text = "S/. ${"%.2f".format(precioUnitario * cantidad)}"
+        holder.txtCantidad.text = "x$cantidad"
+
+        // ✅ Solo mostramos el subtotal (cantidad * precio unitario)
+        val subtotal = precioUnitario * cantidad
+        holder.txtSubtotal.text = "S/. ${"%.2f".format(subtotal)}"
 
         holder.btnPlus.setOnClickListener {
             updateProducto(producto, agregar = true)
@@ -52,7 +53,6 @@ class CarritoAdapter(
     override fun getItemCount(): Int = items.size
 
     private fun updateProducto(producto: Producto, agregar: Boolean) {
-        // Ejecuta en background
         scope.launch(Dispatchers.IO) {
             if (agregar) {
                 CarritoManager.agregarProducto(producto)
@@ -63,11 +63,12 @@ class CarritoAdapter(
             val nuevaLista = CarritoManager.obtenerCarrito().filter { it.cantidad > 0 }
             val total = nuevaLista.sumOf { (it.precio ?: 0.0) * it.cantidad }
 
-            // Actualiza UI en hilo principal
             withContext(Dispatchers.Main) {
                 items.clear()
                 items.addAll(nuevaLista)
                 notifyDataSetChanged()
+
+                // ✅ Enviamos total actualizado a CarritoActivity
                 onCarritoChanged(items, total)
             }
         }
@@ -83,6 +84,6 @@ class CarritoAdapter(
     }
 
     fun clear() {
-        scope.cancel() // Limpia coroutines al destruir adapter
+        scope.cancel()
     }
 }

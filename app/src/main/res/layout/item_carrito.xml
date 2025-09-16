@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="8dp">
+    android:orientation="vertical"
+    android:padding="8dp"
+    android:background="@android:color/white">
 
     <!-- Nombre del producto -->
     <TextView
@@ -12,51 +13,67 @@
         android:layout_height="wrap_content"
         android:text="Producto"
         android:textSize="16sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:paddingBottom="4dp"/>
 
-    <!-- Precio unitario -->
-    <TextView
-        android:id="@+id/txtPrecioUnitarioCarrito"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="S/. 0.00" />
-
-    <!-- Controles de cantidad -->
+    <!-- Precio unitario + cantidad + botones + subtotal -->
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:paddingTop="4dp">
+        android:weightSum="3">
 
-        <Button
-            android:id="@+id/btnMinusCarrito"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:text="-" />
 
-        <TextView
-            android:id="@+id/txtCantidadCarrito"
-            android:layout_width="wrap_content"
+
+        <!-- Controles de cantidad -->
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="0"
-            android:layout_marginStart="12dp"
-            android:layout_marginEnd="12dp"
-            android:textSize="16sp" />
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:gravity="center">
 
-        <Button
-            android:id="@+id/btnPlusCarrito"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:text="+" />
+            <Button
+                android:id="@+id/btnMinusCarrito"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:text="-" />
+
+            <TextView
+                android:id="@+id/txtCantidadCarrito"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="1"
+                android:textSize="14sp" />
+
+            <Button
+                android:id="@+id/btnPlusCarrito"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:text="+" />
+        </LinearLayout>
+
+        <!-- Subtotal -->
+        <TextView
+            android:id="@+id/txtSubtotalCarrito"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:text="S/. 0.00"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"/>
     </LinearLayout>
 
-    <!-- Subtotal -->
-    <TextView
-        android:id="@+id/txtSubtotalCarrito"
+    <!-- Línea divisoria -->
+    <View
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Subtotal: S/. 0.00"
-        android:paddingTop="4dp"
-        android:textStyle="italic" />
+        android:layout_height="1dp"
+        android:background="#E0E0E0"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="6dp"/>
 </LinearLayout>

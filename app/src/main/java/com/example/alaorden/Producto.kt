@@ -8,4 +8,5 @@ data class Producto(
     var precio: Double = 0.0,   // 👈 valor por defecto agregado
     var imagenUrl: String? = "",
     var cantidad: Int = 0
+
 )
