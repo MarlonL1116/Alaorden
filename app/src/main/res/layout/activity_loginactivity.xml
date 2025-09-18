@@ -1,57 +1,79 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/card"
+    android:background="@color/PrimarioOscuro"
     tools:context=".LoginActivity">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="24dp"
-        android:layout_centerInParent="true"
-        app:cardCornerRadius="16dp"
-        app:cardElevation="8dp">
+        android:layout_margin="40dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="8dp"
+        android:padding="24dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="24dp">
+            android:padding="24dp"
+            android:gravity="center_horizontal"
+            android:background="@color/Terciario">
+
+            <!-- Logo -->
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                android:layout_marginBottom="31dp"
+                android:src="@mipmap/iconalaorden" />
 
             <!-- Título -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:text="INICIAR SESIÓN"
-                android:textColor="@color/Primario"
+                android:textSize="24sp"
                 android:textStyle="bold"
-                android:textSize="20sp"
-                android:layout_gravity="center"/>
+                android:textColor="@color/PrimarioOscuro" />
 
-            <!-- Usuario -->
+            <!-- Campo Email -->
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Usuario o correo electrónico">
+                android:layout_marginTop="16dp"
+                android:hint="Usuario o Correo Electrónico"
+                android:orientation="horizontal"
+                app:boxCornerRadiusBottomEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusTopStart="12dp"
+                app:boxStrokeColor="@color/Primario">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editTextEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textEmailAddress"/>
+                    android:inputType="textEmailAddress" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Contraseña -->
+            <!-- Campo Password -->
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Contraseña"
-                app:endIconMode="password_toggle">
+                android:layout_marginTop="16dp"
+                app:boxStrokeColor="@color/Primario"
+                app:endIconMode="password_toggle"
+                app:boxCornerRadiusTopStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusBottomEnd="12dp"
+                android:hint="Contraseña">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editTextPassword"
+                    android:id="@+id/etPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"/>
@@ -62,22 +84,35 @@
                 android:id="@+id/btnIngresar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="INGRESAR"
+                android:text="INICIAR SESION"
                 android:textAllCaps="true"
                 android:background="@drawable/botondegradado"
                 android:textColor="@android:color/white"
                 android:layout_marginTop="16dp"/>
 
-            <!-- Enlace Registrarse -->
-            <TextView
-                android:id="@+id/txtRegistrar"
-                android:layout_width="match_parent"
+            <!-- Texto de registro -->
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="¿No tienes cuenta? Regístrate"
-                android:textColor="@color/linkColor"
-                android:textSize="14sp"
-                android:layout_marginTop="12dp"/>
+                android:orientation="horizontal"
+                android:layout_marginTop="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="¿Aún no tienes una cuenta?"
+                    android:textColor="@color/plomo" />
+
+                <TextView
+                    android:id="@+id/txtRegistrar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:text="Regístrate"
+                    android:textColor="@color/Primario"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
         </LinearLayout>
     </androidx.cardview.widget.CardView>
-</RelativeLayout>
+</ScrollView>

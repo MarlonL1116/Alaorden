@@ -3,6 +3,7 @@
     <color name="Primario">#8B0000</color>
     <color name="PrimarioOscuro">#4B0000</color>
     <color name="Secundario">#925c60</color>
+    <color name="Terciario">#faf3e3</color>
     <color name="Dorado">#FFD700</color>
     <color name="negro">#212121</color>
     <color name="gris">#757575</color>
@@ -11,7 +12,7 @@
     <color name="error">#FF9800</color>
     <color name="aceptar">#4CAF50</color>
     <color name="black">#000000</color>
-    <color name="darker_gray">#555555</color>
+    <color name="plomo">#555555</color>
     <color name="teal_700">#018786</color>
 
 

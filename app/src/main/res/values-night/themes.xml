@@ -1,9 +1,9 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Tema principal de tu app -->
+
     <style name="Theme.ALaOrden" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Colores principales -->
+        <!-- Colores principales en oscuro -->
         <item name="colorPrimary">@color/Primario</item>
-        <item name="colorOnPrimary">@android:color/primary_text_dark</item>
+        <item name="colorOnPrimary">@android:color/black</item>
 
         <item name="colorSecondary">@color/PrimarioOscuro</item>
         <item name="colorOnSecondary">@android:color/black</item>
@@ -14,5 +14,9 @@
         <!-- Barra de estado -->
         <item name="android:statusBarColor">?attr/colorPrimary</item>
         <item name="android:navigationBarColor">?attr/colorSurface</item>
+
+        <!-- Fondo oscuro -->
+        <item name="android:windowBackground">@android:color/black</item>
     </style>
+
 </resources>

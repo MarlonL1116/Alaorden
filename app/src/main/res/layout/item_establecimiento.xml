@@ -3,30 +3,75 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    app:cardCornerRadius="12dp"
-    app:cardElevation="6dp">
+    app:cardCornerRadius="16dp"
+    app:cardElevation="6dp"
+    android:foreground="?attr/selectableItemBackground">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/txtName"
-            android:layout_width="wrap_content"
+        <!-- Imagen del restaurante -->
+        <ImageView
+            android:id="@+id/imgRestaurant"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_launcher_background"
+            android:contentDescription="Imagen del establecimiento"
+            />
+
+        <!-- Contenido -->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Nombre del establecimiento"
-            android:textStyle="bold"
-            android:textSize="18sp" />
+            android:orientation="vertical"
+            android:padding="12dp">
 
-        <TextView
-            android:id="@+id/txtType"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Tipo"
-            android:textSize="14sp"
-            android:textColor="@android:color/darker_gray" />
+            <TextView
+                android:id="@+id/txtName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nombre del establecimiento"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="@android:color/black" />
 
+            <TextView
+                android:id="@+id/txtType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="20-30 min"
+                android:textSize="14sp"
+                android:textColor="@android:color/darker_gray"
+                android:layout_marginTop="4dp" />
+
+            <!-- Calificación -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="6dp"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/estrella"
+                    />
+
+                <TextView
+                    android:id="@+id/txtRating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="4.5"
+                    android:textSize="14sp"
+                    android:textColor="@android:color/black"
+                    android:layout_marginStart="4dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

@@ -22,7 +22,7 @@ class LoginActivity : AppCompatActivity() {
 
 
         val emailInput = findViewById<EditText>(R.id.editTextEmail)
-        val passwordInput = findViewById<EditText>(R.id.editTextPassword)
+        val passwordInput = findViewById<EditText>(R.id.etPassword)
         val btnLogin = findViewById<Button>(R.id.btnIngresar)
         val txtGoRegister = findViewById<TextView>(R.id.txtRegistrar)
 

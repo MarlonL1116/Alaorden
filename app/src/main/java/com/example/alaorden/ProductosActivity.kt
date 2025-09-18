@@ -83,6 +83,8 @@ class ProductosActivity : AppCompatActivity() {
             .get()
             .addOnSuccessListener { result ->
                 listaProductos.clear()
+                Log.d("ProductosActivity", "Productos encontrados: ${result.size()}")
+
                 for (doc in result) {
                     try {
                         val producto = doc.toObject(Producto::class.java)

@@ -1,9 +1,12 @@
 package com.example.alaorden
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
+
+import android.widget.LinearLayout
 import android.widget.Toast
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,9 +21,16 @@ class MainActivity : AppCompatActivity() {
     private val listaEstablecimientos = mutableListOf<Establecimientos>()
     private val listaFiltrada = mutableListOf<Establecimientos>()
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val sharedPref = getSharedPreferences("LoginPrefs", MODE_PRIVATE)
+        val username = sharedPref.getString("username", null) ?: "Usuario"
+
+        val tvSaludo = findViewById<TextView>(R.id.tvSaludo)
+        tvSaludo.text = "Hola, $username 👋"
+
 
         recycler = findViewById(R.id.recyclerEstablecimientos)
         recycler.layoutManager = LinearLayoutManager(this)
@@ -38,13 +48,13 @@ class MainActivity : AppCompatActivity() {
         recycler.adapter = adapter
 
         // Botones de filtro
-        val btnRestaurants = findViewById<Button>(R.id.btnRestaurants)
-        val btnStores = findViewById<Button>(R.id.btnStores)
-        val btnPharmacies = findViewById<Button>(R.id.btnPharmacies)
+        val btnRestaurantes = findViewById<LinearLayout>(R.id.btnRestaurantes)
+        val btnTiendas = findViewById<LinearLayout>(R.id.btnTiendas)
+        val btnFarmacias = findViewById<LinearLayout>(R.id.btnFarmacias)
 
-        btnRestaurants.setOnClickListener { filtrarLista("restaurante") }
-        btnStores.setOnClickListener { filtrarLista("tienda") }
-        btnPharmacies.setOnClickListener { filtrarLista("farmacia") }
+        btnRestaurantes.setOnClickListener { filtrarLista("restaurante") }
+        btnTiendas.setOnClickListener { filtrarLista("tienda") }
+        btnFarmacias.setOnClickListener { filtrarLista("farmacia") }
 
         // Cargar datos desde Firebase
         cargarEstablecimientos()
