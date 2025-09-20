@@ -77,6 +77,7 @@ class ProductosActivity : AppCompatActivity() {
     }
 
     private fun cargarProductos(establecimientoId: String) {
+        Log.d("ProductosActivity", "Cargando productos para establecimiento: $establecimientoId")
         db.collection("establecimientos")
             .document(establecimientoId)
             .collection("productos")
@@ -95,7 +96,9 @@ class ProductosActivity : AppCompatActivity() {
                         Log.e("ProductosActivity", "Error al convertir producto: ${doc.id}", e)
                     }
                 }
+                Log.d("ProductosActivity", "Lista de productos actualizada: ${listaProductos.size}")
                 productosAdapter.updateList(listaProductos)
+
             }
             .addOnFailureListener { e ->
                 Toast.makeText(this, "Error al cargar productos", Toast.LENGTH_SHORT).show()

@@ -1,5 +1,6 @@
 package com.example.alaorden
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,7 +33,7 @@ class ProductosAdapter(
 
     override fun onBindViewHolder(holder: ProductoViewHolder, position: Int) {
         val producto = productos[position]
-
+    Log.d("ProductosAdapter", "Producto: $producto")
         holder.nombre.text = producto.nombre ?: ""
         holder.descripcion.text = producto.descripcion ?: ""
         holder.precio.text = "S/. ${"%.2f".format(producto.precio)}"
@@ -84,7 +85,7 @@ class ProductosAdapter(
     override fun getItemCount(): Int = productos.size
 
     fun updateList(newList: List<Producto>) {
-        productos.clear()
+        Log.d("ProductosAdapter", "Actualizando lista de productos: ${newList.size}")
         productos.addAll(newList)
         notifyDataSetChanged()
     }

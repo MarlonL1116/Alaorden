@@ -12,8 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.FirebaseFirestore
 
-class MainActivity : AppCompatActivity() {
 
+class MainActivity : AppCompatActivity() {
+    private lateinit var tvSaludo: TextView
     private lateinit var recycler: RecyclerView
     private lateinit var adapter: EstablecimientoAdapter
     private val db = FirebaseFirestore.getInstance()
@@ -25,12 +26,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        tvSaludo = findViewById(R.id.tvSaludo)
+
         val sharedPref = getSharedPreferences("LoginPrefs", MODE_PRIVATE)
-        val username = sharedPref.getString("username", null) ?: "Usuario"
-
-        val tvSaludo = findViewById<TextView>(R.id.tvSaludo)
+        val username = sharedPref.getString("name", "Usuario")
         tvSaludo.text = "Hola, $username 👋"
-
 
         recycler = findViewById(R.id.recyclerEstablecimientos)
         recycler.layoutManager = LinearLayoutManager(this)

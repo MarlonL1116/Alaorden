@@ -2,6 +2,7 @@ package com.example.alaorden
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +16,7 @@ class PerfilActivity : AppCompatActivity() {
     private lateinit var txtTelefono: TextView
     private lateinit var txtCorreo: TextView
     private lateinit var bottomNav: BottomNavigationView
+    private lateinit var btnCerrarSesion: Button
 
     private val auth by lazy { FirebaseAuth.getInstance() }
     private val db by lazy { FirebaseFirestore.getInstance() }
@@ -27,6 +29,7 @@ class PerfilActivity : AppCompatActivity() {
         txtTelefono = findViewById(R.id.txtTelefono)
         txtCorreo = findViewById(R.id.txtCorreo)
         bottomNav = findViewById(R.id.bottom_navigation)
+        btnCerrarSesion = findViewById(R.id.btnCerrarSesion)
 
         txtNombre.text = "Nombre: —"
         txtTelefono.text = "Teléfono: —"
@@ -50,7 +53,13 @@ class PerfilActivity : AppCompatActivity() {
                     Toast.makeText(this, "No se pudo cargar perfil: ${e.message}", Toast.LENGTH_SHORT).show()
                 }
         }
-
+        btnCerrarSesion.setOnClickListener {
+            auth.signOut()
+            val intent = Intent(this, LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            finish()
+        }
         // Seleccionar item
         bottomNav.selectedItemId = R.id.nav_perfil
 

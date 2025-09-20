@@ -1,49 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical"
     android:padding="16dp">
-
-    <TextView
-        android:id="@+id/txtNombre"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Nombre: —"
-        android:textSize="18sp"
-        android:padding="4dp" />
-
-    <TextView
-        android:id="@+id/txtTelefono"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Teléfono: —"
-        android:textSize="18sp"
-        android:padding="4dp" />
-
-    <TextView
-        android:id="@+id/txtCorreo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Correo: —"
-        android:textSize="18sp"
-        android:padding="4dp" />
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_height="40dp" />
+    <!-- Encabezado -->
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:paddingBottom="16dp"
+        android:text="Mi perfil"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
+    <!-- Foto de perfil y nombre -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingBottom="16dp">
 
+        <ImageView
+            android:id="@+id/imgPerfil"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/circulo"
+            android:padding="4dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_person" />
+
+        <TextView
+            android:id="@+id/txtNombre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Nombre de Usuario"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtCorreo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="correo@ejemplo.com"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/btnEditarPerfil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/botondegradado"
+            android:text="Editar Perfil"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+
+    <!-- Lista de opciones estilo menú -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="?android:attr/dividerVertical"
+        android:orientation="vertical"
+        android:showDividers="middle">
+        <TextView
+            android:id="@+id/txtTelefono"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:text="Teléfono: —"
+            android:textSize="18sp" />
+        <TextView
+            android:id="@+id/btnSettings"
+            style="@style/MenuItemStyle"
+            android:text="Configuracion" />
+
+        <TextView
+            android:id="@+id/btnOrders"
+            style="@style/MenuItemStyle"
+            android:text="Mis pedidos" />
+
+        <TextView
+            android:id="@+id/btnAddress"
+            style="@style/MenuItemStyle"
+            android:text="Direccion" />
+
+        <TextView
+            android:id="@+id/btnPassword"
+            style="@style/MenuItemStyle"
+            android:text="Cambiar Contraseña" />
+        <TextView
+            android:id="@+id/btnNotifications"
+            style="@style/MenuItemStyle"
+            android:text="Notificaciones" />
+
+    </LinearLayout>
+    <!-- Botón de cerrar sesión -->
+    <Button
+        android:id="@+id/btnCerrarSesion"
+        android:layout_width="222dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/botondegradado"
+        android:text="Cerrar Sesion"
+        android:textColor="@android:color/white" />
+
+    <!-- Barra de navegación inferior -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
         android:background="?android:attr/windowBackground"
         app:itemIconTint="@color/Primario"
         app:itemTextColor="@color/PrimarioOscuro"
         app:labelVisibilityMode="labeled"
         app:menu="@menu/barramenu" />
-</LinearLayout>
 
+</LinearLayout>
