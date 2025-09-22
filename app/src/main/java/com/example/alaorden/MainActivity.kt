@@ -22,7 +22,6 @@ class MainActivity : AppCompatActivity() {
     private val listaEstablecimientos = mutableListOf<Establecimientos>()
     private val listaFiltrada = mutableListOf<Establecimientos>()
 
-    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)

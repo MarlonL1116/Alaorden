@@ -12,9 +12,9 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- Imagen del restaurante -->
+        <!-- Imagen del establecimiento -->
         <ImageView
-            android:id="@+id/imgRestaurant"
+            android:id="@+id/imgEstablecimiento"
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:scaleType="centerCrop"

@@ -1,0 +1,18 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <!-- Plato -->
+    <path
+        android:fillColor="@color/Terciario"
+        android:pathData="M12,20a8,8 0,1 0,-0.01 -16.01A8,8 0,0 0,12,20zM12,18a6,6 0,1 1,0 -12,6,6 0,0 1,0 12z"/>
+    <!-- Cuchillo -->
+    <path
+        android:fillColor="@color/Terciario"
+        android:pathData="M18,2h1v10h-1z"/>
+    <!-- Tenedor -->
+    <path
+        android:fillColor="@color/Terciario"
+        android:pathData="M16,2h1v4h-1zM16,7h1v5h-1z"/>
+</vector>

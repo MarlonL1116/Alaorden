@@ -104,7 +104,7 @@
             <ImageView
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-
+                android:src="@drawable/ic_restaurante"
                 android:background="@drawable/circulo"
                 android:padding="12dp"/>
 
@@ -133,7 +133,7 @@
             <ImageView
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-
+                android:src="@drawable/ic_tienda"
                 android:background="@drawable/circulo"
                 android:padding="12dp"/>
 
@@ -161,7 +161,7 @@
             <ImageView
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-
+                android:src="@drawable/ic_farmacia"
                 android:background="@drawable/circulo"
                 android:padding="12dp"/>
 

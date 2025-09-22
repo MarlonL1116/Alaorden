@@ -1,0 +1,18 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <!-- Techo -->
+    <path
+        android:fillColor="@color/Terciario"
+        android:pathData="M3,7h18l-2,5H5z"/>
+    <!-- Cuerpo -->
+    <path
+        android:fillColor="@color/Terciario"
+        android:pathData="M4,12h16v9H4z"/>
+    <!-- Puerta -->
+    <path
+        android:fillColor="@color/Primario"
+        android:pathData="M10,15h4v6h-4z"/>
+</vector>
