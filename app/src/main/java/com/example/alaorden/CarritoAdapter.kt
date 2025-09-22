@@ -21,6 +21,7 @@ class CarritoAdapter(
         val txtSubtotal: TextView = itemView.findViewById(R.id.txtSubtotalCarrito) // 👈 asegúrate que existe en item_carrito.xml
         val btnMinus: Button = itemView.findViewById(R.id.btnMinusCarrito)
         val btnPlus: Button = itemView.findViewById(R.id.btnPlusCarrito)
+        val btnPagar: Button = itemView.findViewById(R.id.btnPagar)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

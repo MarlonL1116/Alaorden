@@ -11,13 +11,12 @@
         android:roundIcon="@mipmap/iconalaorden_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ALaOrden">
-
-
-        <activity android:name=".RegisterActivity" />
-
-
-
-        <!-- AHORA LoginActivity es la inicial -->
+        <activity
+            android:name=".MetodoPagoActivity"
+            android:exported="false"
+            android:label="@string/title_activity_metodo_pago"
+            android:theme="@style/Theme.ALaOrden" />
+        <activity android:name=".RegisterActivity" /> <!-- AHORA LoginActivity es la inicial -->
         <activity
             android:name=".LoginActivity"
             android:exported="true"
@@ -25,15 +24,14 @@
             android:theme="@style/Theme.ALaOrden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".MainActivity" />
-
         <activity android:name=".ProductosActivity" />
         <activity android:name=".PerfilActivity" />
         <activity android:name=".CarritoActivity" />
-
     </application>
+
 </manifest>

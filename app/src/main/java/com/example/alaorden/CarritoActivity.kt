@@ -2,11 +2,13 @@ package com.example.alaorden
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
+
 
 class CarritoActivity : AppCompatActivity() {
 
@@ -15,6 +17,7 @@ class CarritoActivity : AppCompatActivity() {
     private lateinit var totalText: TextView
     private lateinit var bottomNav: BottomNavigationView
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_carrito)
@@ -22,8 +25,8 @@ class CarritoActivity : AppCompatActivity() {
         recycler = findViewById(R.id.recyclerCarrito)
         totalText = findViewById(R.id.txtTotal)
         bottomNav = findViewById(R.id.bottom_navigation)
-
         recycler.layoutManager = LinearLayoutManager(this)
+        val btnPagar = findViewById<Button>(R.id.btnPagar)
 
         // Obtener carrito actual
         val productos = CarritoManager.obtenerCarrito().toMutableList()
@@ -58,6 +61,16 @@ class CarritoActivity : AppCompatActivity() {
                 else -> false
             }
         }
+
+        btnPagar.setOnClickListener {
+            val lista = CarritoManager.obtenerCarrito()
+            val total = lista.sumOf { (it.precio ?: 0.0) * it.cantidad }
+
+            val intent = Intent(this, MetodoPagoActivity::class.java)
+            intent.putExtra("TOTAL_CARRITO", total) // Enviar el total al layout de pago
+            startActivity(intent)
+        }
+
     }
 
     override fun onResume() {
@@ -73,3 +86,5 @@ class CarritoActivity : AppCompatActivity() {
         totalText.text = "Total: S/. ${"%.2f".format(total)}"
     }
 }
+
+
