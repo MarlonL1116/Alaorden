@@ -40,8 +40,7 @@ class CarritoActivity : AppCompatActivity() {
         // Mostrar el total inicial
         calcularTotal(productos)
 
-        // Seleccionar el item actual en la barra
-        bottomNav.selectedItemId = R.id.nav_carrito
+
 
         // Navegación inferior
         bottomNav.setOnItemSelectedListener { item ->
@@ -61,6 +60,8 @@ class CarritoActivity : AppCompatActivity() {
                 else -> false
             }
         }
+        // Seleccionar el item actual en la barra
+        bottomNav.selectedItemId = R.id.nav_carrito
 
         btnPagar.setOnClickListener {
             val lista = CarritoManager.obtenerCarrito()

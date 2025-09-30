@@ -9,7 +9,9 @@
     android:background="@color/Terciario"
     android:theme="@style/Theme.Material3.Light.NoActionBar"
     >
-
+    <View
+        android:layout_width="10dp"
+        android:layout_height="10dp"/>
     <!-- Encabezado con título y foto de usuario -->
     <RelativeLayout
         android:layout_width="match_parent"

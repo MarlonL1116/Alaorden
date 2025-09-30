@@ -79,10 +79,9 @@
                 android:id="@+id/btnAgregar"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:text="+"
+                android:textColor="@color/white"
                 android:textSize="20sp"
-                android:backgroundTint="@color/teal_700"
-                android:textColor="@android:color/white"/>
+                />
         </LinearLayout>
 
     </LinearLayout>
