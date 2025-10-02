@@ -13,6 +13,8 @@ class EstablecimientoAdapter(
     private val onItemClick: (Establecimientos) -> Unit
 ) : RecyclerView.Adapter<EstablecimientoAdapter.ViewHolder>() {
 
+    private var listaOriginal: List<Establecimientos> = lista
+
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val txtName: TextView = itemView.findViewById(R.id.txtName)
         val txtType: TextView = itemView.findViewById(R.id.txtType)
@@ -29,11 +31,13 @@ class EstablecimientoAdapter(
         val est = lista[position]
         holder.txtName.text = est.name
         holder.txtType.text = est.type
+
         // 🔹 Cargar imagen con Glide
-            Glide.with(holder.itemView.context)
+        Glide.with(holder.itemView.context)
             .load(est.imageUrl)
-            .error(R.drawable.ic_launcher_background) // si falla
+            .error(R.drawable.ic_launcher_background) // si falla carga un placeholder
             .into(holder.imgEstablecimiento)
+
         holder.itemView.setOnClickListener {
             onItemClick(est)
         }
@@ -41,9 +45,22 @@ class EstablecimientoAdapter(
 
     override fun getItemCount(): Int = lista.size
 
+    // 🔹 Actualiza lista desde Firebase
     fun updateList(nuevaLista: List<Establecimientos>) {
         lista = nuevaLista
+        listaOriginal = ArrayList(nuevaLista) // guardamos copia para futuros filtros
+        notifyDataSetChanged()
+    }
+
+    // 🔹 Filtra por nombre en tiempo real
+    fun filter(query: String) {
+        lista = if (query.isEmpty()) {
+            listaOriginal
+        } else {
+            listaOriginal.filter {
+                it.name.contains(query, ignoreCase = true)
+            }
+        }
         notifyDataSetChanged()
     }
 }
-
