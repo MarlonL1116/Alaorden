@@ -12,6 +12,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ALaOrden">
         <activity
+            android:name=".YapePlinActivity"
+            android:exported="false"
+            android:label="@string/title_activity_yape_plin"
+            android:theme="@style/Theme.ALaOrden" />
+        <activity
+            android:name=".ConfirmacionPagoActivity"
+            android:exported="false"
+            android:label="@string/title_activity_confirmacion_pago"
+            android:theme="@style/Theme.ALaOrden" />
+        <activity
+            android:name=".TarjetaPagoActivity"
+            android:exported="false"
+            android:label="@string/title_activity_tarjeta_pago"
+            android:theme="@style/Theme.ALaOrden" />
+        <activity
             android:name=".MetodoPagoActivity"
             android:exported="false"
             android:label="@string/title_activity_metodo_pago"

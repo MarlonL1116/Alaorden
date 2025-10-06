@@ -3,4 +3,7 @@
     <string name="ingresar">Ingresar</string>
     <string name="hola_username">Hola, $username 👋</string>
     <string name="title_activity_metodo_pago">MetodoPago</string>
+    <string name="title_activity_tarjeta_pago">TarjetaPagoActivity</string>
+    <string name="title_activity_confirmacion_pago">ConfirmacionPagoActivity</string>
+    <string name="title_activity_yape_plin">YapePlinActivity</string>
 </resources>
