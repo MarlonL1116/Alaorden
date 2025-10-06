@@ -60,8 +60,8 @@
                 android:id="@+id/btnAgregar"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:background="@drawable/botondegradado"
-                android:drawableTop="@drawable/ic_plus"/>
+                android:backgroundTint="@color/teal_700"
+                android:drawableTop="@drawable/ic_minus"/>
 
 
             <TextView
@@ -79,7 +79,7 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:background="@drawable/botondegradado"
-                android:drawableTop="@drawable/ic_minus"/>
+                android:drawableTop="@drawable/ic_plus"/>
 
         </LinearLayout>
 

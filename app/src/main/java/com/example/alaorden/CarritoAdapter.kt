@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.*
@@ -19,8 +20,8 @@ class CarritoAdapter(
         val txtNombre: TextView = itemView.findViewById(R.id.txtNombreCarrito)
         val txtCantidad: TextView = itemView.findViewById(R.id.txtCantidadCarrito)
         val txtSubtotal: TextView = itemView.findViewById(R.id.txtSubtotalCarrito) // 👈 asegúrate que existe en item_carrito.xml
-        val btnMinus: Button = itemView.findViewById(R.id.btnMinusCarrito)
-        val btnPlus: Button = itemView.findViewById(R.id.btnPlusCarrito)
+        val btnMinus: ImageButton = itemView.findViewById(R.id.btnMinusCarrito)
+        val btnPlus: ImageButton = itemView.findViewById(R.id.btnPlusCarrito)
         //val btnPagar: Button = itemView.findViewById(R.id.btnPagar)
     }
 

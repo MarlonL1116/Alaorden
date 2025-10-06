@@ -25,8 +25,6 @@
         android:gravity="center_vertical"
         android:weightSum="3">
 
-
-
         <!-- Controles de cantidad -->
         <LinearLayout
             android:layout_width="0dp"
@@ -35,11 +33,14 @@
             android:orientation="horizontal"
             android:gravity="center">
 
-            <Button
+            <ImageButton
                 android:id="@+id/btnMinusCarrito"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:text="-" />
+                android:background="@drawable/botondegradado"
+                android:src="@drawable/ic_minus"
+                />
+
 
             <TextView
                 android:id="@+id/txtCantidadCarrito"
@@ -49,11 +50,12 @@
                 android:text="1"
                 android:textSize="14sp" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/btnPlusCarrito"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:text="+" />
+                android:background="@drawable/botondegradado"
+                android:src="@drawable/ic_plus" />
         </LinearLayout>
 
         <!-- Subtotal -->
