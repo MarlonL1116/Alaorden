@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 
 class ProductosAdapter(
     private var productos: MutableList<Producto>,
@@ -19,7 +20,7 @@ class ProductosAdapter(
         val nombre: TextView = itemView.findViewById(R.id.txtNombreProducto)
         val descripcion: TextView = itemView.findViewById(R.id.txtDescripcionProducto)
         val precio: TextView = itemView.findViewById(R.id.txtPrecioProducto)
-        val imagen: ImageView = itemView.findViewById(R.id.imgProducto)
+        val imgProducto: ImageView = itemView.findViewById(R.id.imgProducto)
         val btnAgregar: Button = itemView.findViewById(R.id.btnAgregar)
         val btnQuitar: Button = itemView.findViewById(R.id.btnQuitar)
         val txtCantidad: TextView = itemView.findViewById(R.id.txtCantidad)
@@ -38,6 +39,11 @@ class ProductosAdapter(
         holder.descripcion.text = producto.descripcion ?: ""
         holder.precio.text = "S/. ${"%.2f".format(producto.precio)}"
         holder.txtCantidad.text = producto.cantidad.toString()
+        // 🔹 Cargar imagen con Glide
+        Glide.with(holder.itemView.context)
+            .load(producto.imageUrl)
+            .error(R.drawable.ic_launcher_background) // si falla carga un placeholder
+            .into(holder.imgProducto)
 
         holder.btnAgregar.setOnClickListener {
             if (producto.cantidad > 0) {

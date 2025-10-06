@@ -6,7 +6,7 @@ data class Producto(
     var nombre: String? = "",
     var descripcion: String? = "",
     var precio: Double = 0.0,   // 👈 valor por defecto agregado
-    var imagenUrl: String? = "",
+    var imageUrl: String? = "",
     var cantidad: Int = 0
 
 )
