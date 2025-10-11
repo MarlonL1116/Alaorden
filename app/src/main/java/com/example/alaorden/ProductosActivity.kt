@@ -18,7 +18,6 @@ class ProductosActivity : AppCompatActivity() {
     private lateinit var bottomNav: BottomNavigationView
     private lateinit var txtTotal: TextView
 
-    private val listaProductos = mutableListOf<Producto>()
     private val db = FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,7 +31,7 @@ class ProductosActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         // Adaptador con callback que actualiza el total
-        productosAdapter = ProductosAdapter(listaProductos) { carrito, total ->
+        productosAdapter = ProductosAdapter(mutableListOf()) { carrito, total ->
             txtTotal.text = "Total: S/. ${"%.2f".format(total)}"
         }
         recyclerView.adapter = productosAdapter
@@ -58,6 +57,10 @@ class ProductosActivity : AppCompatActivity() {
                     startActivity(Intent(this, CarritoActivity::class.java))
                     true
                 }
+                R.id.nav_historial -> {
+                    startActivity(Intent(this, HistorialActivity::class.java))
+                    true
+                }
                 R.id.nav_perfil -> {
                     startActivity(Intent(this, PerfilActivity::class.java))
                     true
@@ -66,24 +69,27 @@ class ProductosActivity : AppCompatActivity() {
             }
         }
 
+
+
         // Mostrar total inicial
         actualizarTotal()
     }
 
     override fun onResume() {
         super.onResume()
-        productosAdapter.updateList(listaProductos)
         actualizarTotal()
     }
 
     private fun cargarProductos(establecimientoId: String) {
         Log.d("ProductosActivity", "Cargando productos para establecimiento: $establecimientoId")
+
         db.collection("establecimientos")
             .document(establecimientoId)
             .collection("productos")
             .get()
             .addOnSuccessListener { result ->
-                listaProductos.clear()
+                val productosTemp = mutableListOf<Producto>() // ✅ lista temporal
+
                 Log.d("ProductosActivity", "Productos encontrados: ${result.size()}")
 
                 for (doc in result) {
@@ -91,14 +97,14 @@ class ProductosActivity : AppCompatActivity() {
                         val producto = doc.toObject(Producto::class.java)
                         producto.id = doc.id
                         producto.idEstablecimiento = establecimientoId
-                        listaProductos.add(producto)
+                        productosTemp.add(producto)
                     } catch (e: Exception) {
                         Log.e("ProductosActivity", "Error al convertir producto: ${doc.id}", e)
                     }
                 }
-                Log.d("ProductosActivity", "Lista de productos actualizada: ${listaProductos.size}")
-                productosAdapter.updateList(listaProductos)
 
+                Log.d("ProductosActivity", "Lista temporal de productos: ${productosTemp.size}")
+                productosAdapter.updateList(productosTemp) // ✅ sin duplicados ni desaparición
             }
             .addOnFailureListener { e ->
                 Toast.makeText(this, "Error al cargar productos", Toast.LENGTH_SHORT).show()

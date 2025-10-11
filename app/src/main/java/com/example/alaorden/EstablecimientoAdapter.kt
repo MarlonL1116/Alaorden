@@ -1,5 +1,6 @@
 package com.example.alaorden
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,6 +20,7 @@ class EstablecimientoAdapter(
         val txtName: TextView = itemView.findViewById(R.id.txtName)
         val txtType: TextView = itemView.findViewById(R.id.txtType)
         val imgEstablecimiento: ImageView = itemView.findViewById(R.id.imgEstablecimiento)
+        val btnVerMapa: ImageView = itemView.findViewById(R.id.btnVerMapa)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -32,27 +34,37 @@ class EstablecimientoAdapter(
         holder.txtName.text = est.name
         holder.txtType.text = est.type
 
-        // 🔹 Cargar imagen con Glide
         Glide.with(holder.itemView.context)
             .load(est.imageUrl)
-            .error(R.drawable.ic_launcher_background) // si falla carga un placeholder
+            .error(R.drawable.ic_launcher_background)
             .into(holder.imgEstablecimiento)
 
+        // click en todo el item -> abrir productos (ya lo tenías)
         holder.itemView.setOnClickListener {
             onItemClick(est)
+        }
+
+        // click en el botón de mapa -> abrir actividad de mapa
+        holder.btnVerMapa.setOnClickListener {
+            val ctx = holder.itemView.context
+            val intent = Intent(ctx, MapaEstablecimientoActivity::class.java).apply {
+                putExtra("EST_NAME", est.name)
+                // si son null, se mandan 0.0 (puedes cambiar comportamiento)
+                putExtra("EST_LAT", est.latitude ?: 0.0)
+                putExtra("EST_LNG", est.longitude ?: 0.0)
+            }
+            ctx.startActivity(intent)
         }
     }
 
     override fun getItemCount(): Int = lista.size
 
-    // 🔹 Actualiza lista desde Firebase
     fun updateList(nuevaLista: List<Establecimientos>) {
         lista = nuevaLista
-        listaOriginal = ArrayList(nuevaLista) // guardamos copia para futuros filtros
+        listaOriginal = ArrayList(nuevaLista)
         notifyDataSetChanged()
     }
 
-    // 🔹 Filtra por nombre en tiempo real
     fun filter(query: String) {
         lista = if (query.isEmpty()) {
             listaOriginal

@@ -92,6 +92,7 @@ class ProductosAdapter(
 
     fun updateList(newList: List<Producto>) {
         Log.d("ProductosAdapter", "Actualizando lista de productos: ${newList.size}")
+
         productos.addAll(newList)
         notifyDataSetChanged()
     }

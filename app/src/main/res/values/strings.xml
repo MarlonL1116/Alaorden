@@ -6,4 +6,5 @@
     <string name="title_activity_tarjeta_pago">TarjetaPagoActivity</string>
     <string name="title_activity_confirmacion_pago">ConfirmacionPagoActivity</string>
     <string name="title_activity_yape_plin">YapePlinActivity</string>
+    <string name="title_activity_historial">Historial de Compras</string>
 </resources>

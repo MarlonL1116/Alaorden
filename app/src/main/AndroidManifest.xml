@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
 
     <application
         android:allowBackup="true"
@@ -11,27 +14,37 @@
         android:roundIcon="@mipmap/iconalaorden_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ALaOrden">
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyA6N4MhbN3R5SqY7_wUpEm-jG7YkPajE9g" />
+
         <activity
             android:name=".YapePlinActivity"
             android:exported="false"
             android:label="@string/title_activity_yape_plin"
             android:theme="@style/Theme.ALaOrden" />
+
         <activity
             android:name=".ConfirmacionPagoActivity"
             android:exported="false"
             android:label="@string/title_activity_confirmacion_pago"
             android:theme="@style/Theme.ALaOrden" />
+
         <activity
             android:name=".TarjetaPagoActivity"
             android:exported="false"
             android:label="@string/title_activity_tarjeta_pago"
             android:theme="@style/Theme.ALaOrden" />
+
         <activity
             android:name=".MetodoPagoActivity"
             android:exported="false"
             android:label="@string/title_activity_metodo_pago"
             android:theme="@style/Theme.ALaOrden" />
-        <activity android:name=".RegisterActivity" /> <!-- AHORA LoginActivity es la inicial -->
+
+        <!-- 🔹 Registro y login -->
+        <activity android:name=".RegisterActivity" />
+
         <activity
             android:name=".LoginActivity"
             android:exported="true"
@@ -39,14 +52,26 @@
             android:theme="@style/Theme.ALaOrden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- 🔹 Otras actividades -->
         <activity android:name=".MainActivity" />
         <activity android:name=".ProductosActivity" />
         <activity android:name=".PerfilActivity" />
         <activity android:name=".CarritoActivity" />
+        <activity android:name=".HistorialActivity"
+            android:label="@string/title_activity_historial"
+            android:exported="false" />
+
+        <!-- 🔹 Agregar esta actividad que falta -->
+        <activity
+            android:name=".MapaEstablecimientoActivity"
+            android:exported="false"
+            android:label="Ubicación del Establecimiento"
+            android:theme="@style/Theme.ALaOrden" />
+
     </application>
 
 </manifest>
