@@ -1,9 +1,10 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    android:padding="12dp"
-    android:elevation="4dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp"
     android:foreground="?attr/selectableItemBackground">
 
     <LinearLayout
@@ -11,77 +12,140 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- Imagen del producto -->
-        <ImageView
-            android:id="@+id/imgProducto"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_launcher_background" />
+            android:layout_height="180dp">
 
-        <!-- Nombre -->
-        <TextView
-            android:id="@+id/txtNombreProducto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Nombre del producto"
-            android:textStyle="bold"
-            android:textSize="16sp"
-            android:layout_marginTop="8dp"/>
+            <ImageView
+                android:id="@+id/imgProducto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_launcher_background" />
 
-        <!-- Descripción -->
-        <TextView
-            android:id="@+id/txtDescripcionProducto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Descripción breve"
-            android:textSize="14sp"
-            android:layout_marginTop="4dp"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_gravity="bottom"
+                 />
 
-        <!-- Precio -->
-        <TextView
-            android:id="@+id/txtPrecioProducto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="S/. 0.00"
-            android:textColor="@color/black"
-            android:textSize="14sp"
-            android:layout_marginTop="4dp"/>
+        </FrameLayout>
 
-        <!-- Controles estilo carrito -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:layout_marginTop="8dp">
-
-            <Button
-                android:id="@+id/btnAgregar"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:backgroundTint="@color/teal_700"
-                android:drawableTop="@drawable/ic_plus"/>
-
+            android:orientation="vertical"
+            android:padding="12dp">
 
             <TextView
-                android:id="@+id/txtCantidad"
-                android:layout_width="wrap_content"
+                android:id="@+id/txtNombreProducto"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="0"
-                android:textSize="18sp"
-                android:layout_marginHorizontal="16dp"
+                android:text="Nombre del producto"
                 android:textStyle="bold"
-                android:gravity="center" />
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:maxLines="2"
+                android:ellipsize="end"/>
 
-            <Button
-                android:id="@+id/btnQuitar"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="@drawable/botondegradado"
-                android:drawableTop="@drawable/ic_minus"/>
+            <TextView
+                android:id="@+id/txtDescripcionProducto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Descripción breve del producto con detalles importantes"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:lineSpacingExtra="2dp"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:layout_marginTop="6dp"/>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/Terciario"
+                android:layout_marginVertical="12dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Precio"
+                        android:textSize="12sp"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:id="@+id/txtPrecioProducto"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="S/. 0.00"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:layout_marginTop="2dp"/>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/bg_card"
+                    android:padding="4dp">
+
+
+                    <ImageButton
+                        android:id="@+id/btnQuitar"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:background="@drawable/boton_outline"
+                        android:src="@drawable/ic_minus"
+                        android:contentDescription="Quitar producto"
+                        android:scaleType="centerInside"
+                        android:padding="8dp"/>
+
+                    <TextView
+                        android:id="@+id/txtCantidad"
+                        android:layout_width="40dp"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:gravity="center"
+                        android:layout_marginHorizontal="8dp"/>
+
+                    <ImageButton
+                        android:id="@+id/btnAgregar"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:background="@drawable/boton_primer"
+                        android:src="@drawable/ic_plus"
+                        android:contentDescription="Agregar producto"
+                        android:scaleType="centerInside"
+                        android:padding="8dp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
 
         </LinearLayout>
 
     </LinearLayout>
+
 </androidx.cardview.widget.CardView>
