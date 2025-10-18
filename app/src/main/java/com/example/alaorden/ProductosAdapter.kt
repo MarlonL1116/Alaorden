@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -21,8 +22,8 @@ class ProductosAdapter(
         val descripcion: TextView = itemView.findViewById(R.id.txtDescripcionProducto)
         val precio: TextView = itemView.findViewById(R.id.txtPrecioProducto)
         val imgProducto: ImageView = itemView.findViewById(R.id.imgProducto)
-        val btnAgregar: Button = itemView.findViewById(R.id.btnAgregar)
-        val btnQuitar: Button = itemView.findViewById(R.id.btnQuitar)
+        val btnAgregar: ImageButton = itemView.findViewById(R.id.btnAgregar)
+        val btnQuitar: ImageButton = itemView.findViewById(R.id.btnQuitar)
         val txtCantidad: TextView = itemView.findViewById(R.id.txtCantidad)
     }
 

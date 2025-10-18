@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.google.android.material.card.MaterialCardView
 
 class EstablecimientoAdapter(
     private var lista: List<Establecimientos>,
@@ -20,7 +21,7 @@ class EstablecimientoAdapter(
         val txtName: TextView = itemView.findViewById(R.id.txtName)
         val txtType: TextView = itemView.findViewById(R.id.txtType)
         val imgEstablecimiento: ImageView = itemView.findViewById(R.id.imgEstablecimiento)
-        val btnVerMapa: ImageView = itemView.findViewById(R.id.btnVerMapa)
+        val btnVerMapa: MaterialCardView = itemView.findViewById(R.id.btnVerMapa)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -39,17 +40,16 @@ class EstablecimientoAdapter(
             .error(R.drawable.ic_launcher_background)
             .into(holder.imgEstablecimiento)
 
-        // click en todo el item -> abrir productos (ya lo tenías)
+        // 👉 Click en todo el card para abrir los productos del establecimiento
         holder.itemView.setOnClickListener {
             onItemClick(est)
         }
 
-        // click en el botón de mapa -> abrir actividad de mapa
+        // 👉 Click en el botón de mapa (MaterialCardView) para abrir la ubicación
         holder.btnVerMapa.setOnClickListener {
             val ctx = holder.itemView.context
             val intent = Intent(ctx, MapaEstablecimientoActivity::class.java).apply {
                 putExtra("EST_NAME", est.name)
-                // si son null, se mandan 0.0 (puedes cambiar comportamiento)
                 putExtra("EST_LAT", est.latitude ?: 0.0)
                 putExtra("EST_LNG", est.longitude ?: 0.0)
             }
