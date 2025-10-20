@@ -16,7 +16,7 @@
         android:theme="@style/Theme.ALaOrden">
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyA6N4MhbN3R5SqY7_wUpEm-jG7YkPajE9g" />
+            android:value="AIzaSyA4Jdc1jea5fI-SAUfEiKzKJS2nV-UWMfA" />
 
         <activity
             android:name=".YapePlinActivity"

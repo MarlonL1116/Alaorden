@@ -15,17 +15,6 @@
         android:background="@color/Primario"
         android:elevation="4dp">
 
-        <ImageButton
-            android:id="@+id/btnVolverCarrito"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_arrow_back"
-            android:scaleType="centerInside"
-            android:padding="8dp"
-            app:tint="@android:color/white"
-            android:contentDescription="Back"/>
-
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -36,16 +25,6 @@
             android:textColor="@android:color/white"
             android:layout_marginStart="8dp"/>
 
-        <ImageButton
-            android:id="@+id/btnLimpiarCarrito"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_delete"
-            android:scaleType="centerInside"
-            android:padding="8dp"
-            app:tint="@android:color/white"
-            android:contentDescription="Clear cart"/>
     </LinearLayout>
 
 
@@ -171,7 +150,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/Terciario"
+                android:background="@color/PrimarioOscuro"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"/>
 
@@ -188,7 +167,7 @@
                     android:text="Total"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/PrimarioOscuro"/>
 
                 <TextView
                     android:id="@+id/txtTotal"
@@ -197,7 +176,7 @@
                     android:text="S/. 0.00"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/PrimarioOscuro"/>
             </LinearLayout>
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>

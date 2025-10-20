@@ -57,6 +57,10 @@ class CarritoActivity : AppCompatActivity() {
                     startActivity(intent)
                     true
                 }
+                R.id.nav_historial -> { // ✅ NUEVO
+                    startActivity(Intent(this, HistorialActivity::class.java))
+                    true
+                }
                 else -> false
             }
         }

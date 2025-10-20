@@ -7,4 +7,18 @@
     <string name="title_activity_confirmacion_pago">ConfirmacionPagoActivity</string>
     <string name="title_activity_yape_plin">YapePlinActivity</string>
     <string name="title_activity_historial">Historial de Compras</string>
+    <string name="desc_icono_usuario">Icono de perfil de usuario</string>
+    <string name="desc_icono_lupa">Icono de búsqueda</string>
+    <string name="desc_icono_restaurantes">Icono de restaurantes</string>
+    <string name="desc_icono_tiendas">Icono de tiendas</string>
+    <string name="desc_icono_farmacias">Icono de farmacias</string>
+    <string name="que_deseas_buscar">¿Qué deseas buscar?</string>
+    <string name="desc_logo_app">Logo de la aplicación A la orden</string>
+    <string name="desc_imagen_producto">Imagen del producto</string>
+    <string name="nombre_producto_placeholder">Nombre del producto</string>
+    <string name="descripcion_producto_placeholder">Descripción breve del producto con detalles importantes</string>
+    <string name="precio_placeholder">Precio</string>
+    <string name="precio_formato">S/. %.2f</string>
+    <string name="quitar_producto">Quitar producto</string>
+    <string name="agregar_producto">Agregar producto</string>
 </resources>

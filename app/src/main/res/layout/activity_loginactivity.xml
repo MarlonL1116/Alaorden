@@ -84,10 +84,8 @@
                 android:id="@+id/btnIngresar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="INICIAR SESION"
-                android:textAllCaps="true"
-                android:background="@drawable/botondegradado"
-                android:textColor="@android:color/white"
+                android:text="@string/ingresar"
+                style="@style/Widget.App.Button.Gradient"
                 android:layout_marginTop="16dp"/>
 
             <!-- Texto de registro -->

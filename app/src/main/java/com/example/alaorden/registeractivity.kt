@@ -8,6 +8,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.auth.FirebaseAuthException
+import android.util.Log
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -64,7 +66,15 @@ class RegisterActivity : AppCompatActivity() {
                                     }
                             }
                         } else {
-                            Toast.makeText(this, "Error: ${task.exception?.message}", Toast.LENGTH_LONG).show()
+                            val errorMessage = when ((task.exception as? FirebaseAuthException)?.errorCode) {
+                                "ERROR_WEAK_PASSWORD" -> "La contraseña debe tener al menos 6 caracteres."
+                                "ERROR_INVALID_EMAIL" -> "El formato del correo electrónico es inválido."
+                                "ERROR_EMAIL_ALREADY_IN_USE" -> "Ya existe una cuenta con este correo electrónico."
+                                "ERROR_NETWORK_REQUEST_FAILED" -> "Problema de conexión a internet."
+                                else -> "Error al registrar usuario: ${task.exception?.message}"
+                            }
+                            Log.e("RegisterActivity", "Error de registro: ${task.exception?.message}", task.exception)
+                            Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show()
                         }
                     }
             } else {

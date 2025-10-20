@@ -81,6 +81,7 @@ dependencies {
     kapt("com.github.bumptech.glide:compiler:4.16.0")
     annotationProcessor ("com.github.bumptech.glide:compiler:4.16.0")
 
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.0")
 
     // Tests
     testImplementation(libs.junit)

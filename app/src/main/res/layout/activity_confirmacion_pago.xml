@@ -2,31 +2,322 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:gravity="center"
-    android:padding="24dp">
-
-    <ImageView
-        android:src="@drawable/ic_check_circle"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginBottom="20dp" />
-
-    <TextView
-        android:id="@+id/tvMensajeConfirmacion"
-        android:text="Procesando..."
-        android:textSize="18sp"
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <Button
-        android:id="@+id/btnVolverInicio"
+    android:background="@color/Terciario">
+    <View
+        android:layout_width="24dp"
+        android:layout_height="24dp" />
+    <!-- Header with back button -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Volver al inicio"
-        android:textAllCaps="false"
-        android:background="@drawable/botondegradado"
-        android:textColor="@color/white"
-        android:padding="12dp" />
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:gravity="center_vertical">
+        <View
+            android:layout_width="24dp"
+            android:layout_height="24dp" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="CONFIRMACION DE PAGO"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/PrimarioOscuro"
+            android:gravity="center"
+            android:layout_marginStart="16dp" />
+
+        <View
+            android:layout_width="24dp"
+            android:layout_height="24dp" />
+    </LinearLayout>
+
+    <!-- Scrollable content -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Success Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp"
+                android:backgroundTint="@android:color/white">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:padding="24dp">
+
+                    <!-- Success Icon -->
+                    <ImageView
+                        android:src="@drawable/ic_check_circle"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_marginBottom="16dp"
+                        app:tint="@color/aceptar" />
+
+                    <!-- Confirmation Message -->
+                    <TextView
+                        android:id="@+id/tvMensajeConfirmacion"
+                        android:text="PAGO EXITOSO"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/PrimarioOscuro"
+                        android:gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="GRACIAS POR SU COMPRA"
+                        android:textSize="14sp"
+                        android:textColor="@color/plomo"
+                        android:gravity="center" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Order Details Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="2dp"
+                android:backgroundTint="@android:color/white">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="DETALLES DEL PEDIDO"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/PrimarioOscuro"
+                        android:layout_marginBottom="12dp" />
+
+                    <!-- Order Number -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="8dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Nro Pedido"
+                            android:textSize="14sp"
+                            android:textColor="@color/plomo" />
+
+                        <TextView
+                            android:id="@+id/tvNumeroPedido"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="#12345"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/PrimarioOscuro" />
+                    </LinearLayout>
+
+                    <!-- Order Date -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="8dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Fecha"
+                            android:textSize="14sp"
+                            android:textColor="@color/plomo" />
+
+                        <TextView
+                            android:id="@+id/tvFechaPedido"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="18/10/2025"
+                            android:textSize="14sp"
+                            android:textColor="@color/PrimarioOscuro" />
+                    </LinearLayout>
+
+                    <!-- Delivery Time -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Tiempo de entrega"
+                            android:textSize="14sp"
+                            android:textColor="@color/plomo" />
+
+                        <TextView
+                            android:id="@+id/tvTiempoEntrega"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="30-40 min"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/Primario" />
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Payment Summary Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="2dp"
+                android:backgroundTint="@android:color/white">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="RESUMEN DEL PAGO"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/PrimarioOscuro"
+                        android:layout_marginBottom="12dp" />
+
+                    <!-- Subtotal -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="8dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Subtotal"
+                            android:textSize="14sp"
+                            android:textColor="@color/plomo" />
+
+                        <TextView
+                            android:id="@+id/tvSubtotal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="$45.00"
+                            android:textSize="14sp"
+                            android:textColor="@color/PrimarioOscuro" />
+                    </LinearLayout>
+
+                    <!-- Delivery Fee -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="12dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Costo Delivery"
+                            android:textSize="14sp"
+                            android:textColor="@color/plomo" />
+
+                        <TextView
+                            android:id="@+id/tvCostoEntrega"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="$5.00"
+                            android:textSize="14sp"
+                            android:textColor="@color/PrimarioOscuro" />
+                    </LinearLayout>
+
+                    <!-- Divider -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/plomo"
+                        android:layout_marginBottom="12dp" />
+
+                    <!-- Total -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Total"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/PrimarioOscuro" />
+
+                        <TextView
+                            android:id="@+id/tvTotalPago"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="$50.00"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/Primario" />
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Bottom Buttons -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:gravity="bottom">
+
+
+        <!-- Return Home Button -->
+        <Button
+            android:id="@+id/btnVolverInicio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:background="@drawable/botondegradado"
+            android:textSize="16sp"
+            android:text="Volver al inicio"
+            android:textColor="@color/Terciario"
+            android:padding="12dp" />
+    </LinearLayout>
 </LinearLayout>

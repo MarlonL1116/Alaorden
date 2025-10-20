@@ -15,4 +15,13 @@
         <item name="android:statusBarColor">?attr/colorPrimary</item>
         <item name="android:navigationBarColor">?attr/colorSurface</item>
     </style>
+
+    <!-- Estilo para botones con degradado -->
+    <style name="Widget.App.Button.Gradient" parent="Widget.MaterialComponents.Button">
+        <item name="android:background">@drawable/botondegradado</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textStyle">bold</item>
+        <item name="cornerRadius">8dp</item>
+    </style>
 </resources>

@@ -80,6 +80,10 @@ class PerfilActivity : AppCompatActivity() {
                 R.id.nav_perfil -> {
                     true
                 }
+                R.id.nav_historial -> { // ✅ NUEVO
+                    startActivity(Intent(this, HistorialActivity::class.java))
+                    true
+                }
                 else -> false
             }
         }

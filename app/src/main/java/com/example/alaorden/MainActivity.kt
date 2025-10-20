@@ -13,6 +13,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import android.util.Log
+import androidx.appcompat.app.AppCompatDelegate
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,9 +30,11 @@ class MainActivity : AppCompatActivity() {
 
     private val listaEstablecimientos = mutableListOf<Establecimientos>()
     private val listaFiltrada = mutableListOf<Establecimientos>()
+    private var searchJob: Job? = null // Job para el debounce
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         setContentView(R.layout.activity_main)
 
         tvSaludo = findViewById(R.id.tvSaludo)
@@ -66,7 +74,11 @@ class MainActivity : AppCompatActivity() {
         etSearch.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                buscarEstablecimientosYProductos(s.toString().trim())
+                searchJob?.cancel() // Cancela el trabajo anterior si existe
+                searchJob = MainScope().launch {
+                    delay(500) // Espera 500 ms después de la última pulsación
+                    buscarEstablecimientosYProductos(s.toString().trim())
+                }
             }
             override fun afterTextChanged(s: Editable?) {}
         })
@@ -77,7 +89,7 @@ class MainActivity : AppCompatActivity() {
             when (item.itemId) {
                 R.id.nav_inicio -> {
                     val intent = Intent(this, MainActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
                     startActivity(intent)
                     true
                 }
@@ -112,7 +124,8 @@ class MainActivity : AppCompatActivity() {
                 mostrarTodos()
             }
             .addOnFailureListener { e ->
-                Toast.makeText(this, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+                Log.e("MainActivity", "Error al cargar establecimientos", e)
+                Toast.makeText(this, "No se pudieron cargar los establecimientos. Inténtalo de nuevo.", Toast.LENGTH_SHORT).show()
             }
     }
 
@@ -160,7 +173,9 @@ class MainActivity : AppCompatActivity() {
                     adapter.updateList(listaFiltrada)
                 }
                 .addOnFailureListener { e ->
-                    Toast.makeText(this, "Error buscando productos: ${e.message}", Toast.LENGTH_SHORT).show()
+                    Log.e("MainActivity", "Error buscando productos en establecimiento ${est.id}", e)
+                    // No mostrar un Toast por cada error de producto individual para evitar spam
+                    // Toast.makeText(this, "Error buscando productos: ${e.message}", Toast.LENGTH_SHORT).show()
                 }
         }
     }

@@ -2,6 +2,7 @@ package com.example.alaorden
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -9,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.ui.tooling.preview.Preview
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthException
 import com.google.firebase.firestore.FirebaseFirestore
 
 class LoginActivity : AppCompatActivity() {
@@ -22,6 +24,14 @@ class LoginActivity : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
         db = FirebaseFirestore.getInstance()
+
+        // Si ya está logueado, no volver a pedir login
+        val currentUser = auth.currentUser
+        if (currentUser != null) {
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
+            return
+        }
 
         val emailInput = findViewById<EditText>(R.id.editTextEmail)
         val passwordInput = findViewById<EditText>(R.id.etPassword)
@@ -64,7 +74,16 @@ class LoginActivity : AppCompatActivity() {
                                     }
                             }
                         } else {
-                            Toast.makeText(this, "Error: ${task.exception?.message}", Toast.LENGTH_LONG).show()
+                            val errorMessage = when ((task.exception as? FirebaseAuthException)?.errorCode) {
+                                "ERROR_INVALID_EMAIL" -> "El formato del correo electrónico es inválido."
+                                "ERROR_WRONG_PASSWORD" -> "La contraseña es incorrecta."
+                                "ERROR_USER_NOT_FOUND" -> "No existe una cuenta con este correo electrónico."
+                                "ERROR_USER_DISABLED" -> "Esta cuenta ha sido deshabilitada."
+                                "ERROR_NETWORK_REQUEST_FAILED" -> "Problema de conexión a internet."
+                                else -> "Error al iniciar sesión: ${task.exception?.message}"
+                            }
+                            Log.e("LoginActivity", "Error de autenticación: ${task.exception?.message}", task.exception)
+                            Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show()
                         }
                     }
             } else {
@@ -78,14 +97,8 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-
     override fun onStart() {
         super.onStart()
-        // Si ya está logueado, no volver a pedir login
-        val currentUser = auth.currentUser
-        if (currentUser != null) {
-            startActivity(Intent(this, MainActivity::class.java))
-            finish()
-        }
+        // ELIMINADO: La verificación de login se movió a onCreate()
     }
 }

@@ -52,6 +52,7 @@ class EstablecimientoAdapter(
                 putExtra("EST_NAME", est.name)
                 putExtra("EST_LAT", est.latitude ?: 0.0)
                 putExtra("EST_LNG", est.longitude ?: 0.0)
+                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             }
             ctx.startActivity(intent)
         }
