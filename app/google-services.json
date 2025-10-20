@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "626487516631",
+    "project_id": "a-la-orden-8f0fe",
+    "storage_bucket": "a-la-orden-8f0fe.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:626487516631:android:ae2261e16dd35c3965ff92",
+        "android_client_info": {
+          "package_name": "com.example.alaorden"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4Jdc1jea5fI-SAUfEiKzKJS2nV-UWMfA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,9 +1,11 @@
 package com.example.alaorden
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -26,6 +28,30 @@ class HistorialActivity : AppCompatActivity() {
         recyclerView.adapter = adapter
 
         cargarHistorial()
+        val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        bottomNav.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.nav_inicio -> {
+                    val intent = Intent(this, MainActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+                    startActivity(intent)
+                    true
+                }
+                R.id.nav_carrito -> {
+                    startActivity(Intent(this, CarritoActivity::class.java))
+                    true
+                }
+                R.id.nav_historial -> { // ✅ NUEVO
+                    startActivity(Intent(this, HistorialActivity::class.java))
+                    true
+                }
+                R.id.nav_perfil -> {
+                    startActivity(Intent(this, PerfilActivity::class.java))
+                    true
+                }
+                else -> false
+            }
+        }
     }
 
     private fun cargarHistorial() {

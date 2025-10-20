@@ -44,42 +44,33 @@
         app:cardCornerRadius="25dp"
         app:cardElevation="4dp"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginBottom="12dp">
+        android:layout_marginBottom="12dp"
+        app:cardBackgroundColor="@color/Terciario"> <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="16dp">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingHorizontal="12dp"
-            android:gravity="center_vertical">
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/lupa"
+            app:tint="@color/PrimarioOscuro" />
+        <EditText
+        android:id="@+id/etSearch"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+         android:hint="¿Qué deseas buscar?"
+        android:paddingStart="12dp"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:singleLine="true"
+        android:imeOptions="actionSearch"/>
 
-            <ImageView
-                android:id="@+id/icSearch"
-                android:layout_width="35dp"
-                android:layout_height="match_parent"
-                android:src="@drawable/lupa" />
-
-            <EditText
-                android:id="@+id/etSearch"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_toEndOf="@id/icSearch"
-                android:backgroundTint="@color/Terciario"
-                android:hint="¿Qué deseas buscar?"
-                android:paddingStart="40dp"
-                android:textSize="16sp"
-                android:textColor="@color/black"
-                android:singleLine="true"
-                android:imeOptions="actionSearch"/>
-
-            <ImageView
-                android:id="@+id/icFilter"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_alignParentEnd="true"
-                android:visibility="gone"/>
-        </RelativeLayout>
+    </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -106,7 +97,7 @@
                 android:layout_height="60dp"
                 android:src="@drawable/ic_restaurante"
                 android:background="@drawable/circulo"
-                android:padding="12dp"/>
+                app:tint="@color/Terciario" android:padding="12dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
