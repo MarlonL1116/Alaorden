@@ -38,6 +38,15 @@
             android:src="@mipmap/iconalaorden_round" />
     </RelativeLayout>
 
+    <TextView
+        android:id="@+id/tvDireccionSeleccionada"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Enviar a: (ninguna seleccionada)"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="14sp" />
+
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -173,6 +182,64 @@
             android:focusable="true"
             android:foreground="?attr/selectableItemBackgroundBorderless">
         </LinearLayout>
+    </LinearLayout>
+    <!-- BLOQUE DE PEDIDO ACTIVO -->
+    <LinearLayout
+        android:id="@+id/layoutPedidoActivo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="12dp"
+        android:visibility="gone">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="6dp"
+            android:backgroundTint="@android:color/white">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/tvPedidoTitulo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Pedido en curso"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/tvPedidoEstado"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Estado: -"
+                    android:textSize="15sp"
+                    android:paddingTop="4dp" />
+
+                <TextView
+                    android:id="@+id/tvPedidoEstablecimiento"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Establecimiento: -"
+                    android:textSize="15sp"
+                    android:paddingTop="4dp" />
+
+                <TextView
+                    android:id="@+id/tvPedidoTotal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Total: S/0.00"
+                    android:textSize="15sp"
+                    android:paddingTop="4dp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView

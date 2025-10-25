@@ -1,10 +1,8 @@
 package com.example.alaorden
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
@@ -35,56 +33,49 @@ class ProductosAdapter(
 
     override fun onBindViewHolder(holder: ProductoViewHolder, position: Int) {
         val producto = productos[position]
-    Log.d("ProductosAdapter", "Producto: $producto")
+
+        // 🔹 Inicializar siempre en 0 (sin mostrar stock real)
+        if (producto.cantidad < 0) producto.cantidad = 0
+
         holder.nombre.text = producto.nombre ?: ""
         holder.descripcion.text = producto.descripcion ?: ""
         holder.precio.text = "S/. ${"%.2f".format(producto.precio)}"
         holder.txtCantidad.text = producto.cantidad.toString()
-        // 🔹 Cargar imagen con Glide
+
+        // Imagen del producto
         Glide.with(holder.itemView.context)
             .load(producto.imageUrl)
-            .error(R.drawable.ic_launcher_background) // si falla carga un placeholder
+            .error(R.drawable.ic_launcher_background)
             .into(holder.imgProducto)
 
+        // ➕ Botón Agregar
         holder.btnAgregar.setOnClickListener {
-            if (producto.cantidad > 0) {
-                // ⚡ Validamos si el carrito ya tiene productos de otro establecimiento
-                if (CarritoManager.obtenerCarrito().isNotEmpty()) {
-                    val idEstablecimientoCarrito = CarritoManager.obtenerCarrito()[0].idEstablecimiento
-                    if (idEstablecimientoCarrito != producto.idEstablecimiento) {
-                        Toast.makeText(
-                            holder.itemView.context,
-                            "Solo puedes agregar productos del mismo establecimiento",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                        return@setOnClickListener
-                    }
-                }
+            producto.cantidad += 1
+            holder.txtCantidad.text = producto.cantidad.toString()
 
-                producto.cantidad -= 1
-                CarritoManager.agregarProducto(producto.copy(cantidad = 1))
-                holder.txtCantidad.text = producto.cantidad.toString()
-
-                val carrito = CarritoManager.obtenerCarrito()
-                val total = CarritoManager.obtenerTotal()
-                onCarritoChanged(carrito, total)
-
-            } else {
-                Toast.makeText(holder.itemView.context, "Sin stock disponible", Toast.LENGTH_SHORT).show()
-            }
+            // Actualizar carrito
+            CarritoManager.agregarProducto(producto)
+            val carrito = CarritoManager.obtenerCarrito()
+            val total = CarritoManager.obtenerTotal()
+            onCarritoChanged(carrito, total)
         }
 
+        // ➖ Botón Quitar
         holder.btnQuitar.setOnClickListener {
-            // ✅ Ahora quitarProducto devuelve Boolean
-            val success = CarritoManager.quitarProducto(producto)
-            if (success) {
-                producto.cantidad += 1
+            if (producto.cantidad > 0) {
+                producto.cantidad -= 1
                 holder.txtCantidad.text = producto.cantidad.toString()
+
+                CarritoManager.quitarProducto(producto)
                 val carrito = CarritoManager.obtenerCarrito()
                 val total = CarritoManager.obtenerTotal()
                 onCarritoChanged(carrito, total)
             } else {
-                Toast.makeText(holder.itemView.context, "No hay en carrito para quitar", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    holder.itemView.context,
+                    "No puedes tener menos de 0",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
     }
@@ -92,8 +83,9 @@ class ProductosAdapter(
     override fun getItemCount(): Int = productos.size
 
     fun updateList(newList: List<Producto>) {
-        Log.d("ProductosAdapter", "Actualizando lista de productos: ${newList.size}")
-
+        // 🔹 Siempre inicializar en 0 cuando se cargan productos
+        productos.clear()
+        newList.forEach { it.cantidad = 0 }
         productos.addAll(newList)
         notifyDataSetChanged()
     }

@@ -5,20 +5,10 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.alaorden.ui.theme.ALaOrdenTheme
 
 class TarjetaPagoActivity : AppCompatActivity() {
+
     private lateinit var etNumeroTarjeta: EditText
     private lateinit var etFechaVencimiento: EditText
     private lateinit var etCvv: EditText
@@ -34,9 +24,10 @@ class TarjetaPagoActivity : AppCompatActivity() {
         etCvv = findViewById(R.id.etCvv)
         btnConfirmarPago = findViewById(R.id.btnConfirmarPago)
 
-        // Obtener el total enviado
+        // ✅ Recibir el total del carrito
         totalCarrito = intent.getDoubleExtra("TOTAL_CARRITO", 0.0)
 
+        // ✅ Confirmar pago y pasar al Activity de confirmación
         btnConfirmarPago.setOnClickListener {
             val numero = etNumeroTarjeta.text.toString()
             val fecha = etFechaVencimiento.text.toString()
@@ -47,9 +38,10 @@ class TarjetaPagoActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            // Simulación: pasamos al activity de confirmación
+            // 🔹 Pasar datos al activity de confirmación
             val intent = Intent(this, ConfirmacionPagoActivity::class.java)
             intent.putExtra("TOTAL_CARRITO", totalCarrito)
+            intent.putExtra("METODO_PAGO", "Tarjeta")
             startActivity(intent)
             finish()
         }

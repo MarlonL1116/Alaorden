@@ -28,6 +28,7 @@ class HistorialActivity : AppCompatActivity() {
         recyclerView.adapter = adapter
 
         cargarHistorial()
+
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottomNav.setOnItemSelectedListener { item ->
             when (item.itemId) {
@@ -41,8 +42,8 @@ class HistorialActivity : AppCompatActivity() {
                     startActivity(Intent(this, CarritoActivity::class.java))
                     true
                 }
-                R.id.nav_historial -> { // ✅ NUEVO
-                    startActivity(Intent(this, HistorialActivity::class.java))
+                R.id.nav_historial -> {
+                    // Ya estamos en historial
                     true
                 }
                 R.id.nav_perfil -> {
@@ -54,13 +55,14 @@ class HistorialActivity : AppCompatActivity() {
         }
     }
 
+    // 🔹 Cargar el historial de pedidos del usuario
     private fun cargarHistorial() {
         val userId = auth.currentUser?.uid ?: return
 
         db.collection("historial")
             .document(userId)
             .collection("pedidos")
-            .orderBy("fecha")
+            .orderBy("fecha") // 🔸 Campo que agregamos en ConfirmacionPagoActivity
             .get()
             .addOnSuccessListener { result ->
                 pedidosList.clear()
@@ -70,6 +72,9 @@ class HistorialActivity : AppCompatActivity() {
                     pedidosList.add(pedido)
                 }
                 adapter.notifyDataSetChanged()
+            }
+            .addOnFailureListener {
+                // puedes agregar un Toast si deseas avisar que no cargó
             }
     }
 }

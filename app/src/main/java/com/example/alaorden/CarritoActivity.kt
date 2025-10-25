@@ -4,11 +4,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
-
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.Timestamp
 
 class CarritoActivity : AppCompatActivity() {
 
@@ -16,7 +19,8 @@ class CarritoActivity : AppCompatActivity() {
     private lateinit var adapter: CarritoAdapter
     private lateinit var totalText: TextView
     private lateinit var bottomNav: BottomNavigationView
-
+    private val db = FirebaseFirestore.getInstance()
+    private val auth = FirebaseAuth.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +44,21 @@ class CarritoActivity : AppCompatActivity() {
         // Mostrar el total inicial
         calcularTotal(productos)
 
+        // 🔹 Confirmar pedido
+        btnPagar.setOnClickListener {
+            val lista = CarritoManager.obtenerCarrito()
+            val total = lista.sumOf { (it.precio) * it.cantidad }
+
+            if (lista.isEmpty()) {
+                Toast.makeText(this, "Tu carrito está vacío.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            // 🔹 Solo navegar a la pantalla de método de pago
+            val intent = Intent(this, MetodoPagoActivity::class.java)
+            intent.putExtra("TOTAL_CARRITO", total)
+            startActivity(intent)
+        }
 
 
         // Navegación inferior
@@ -57,39 +76,25 @@ class CarritoActivity : AppCompatActivity() {
                     startActivity(intent)
                     true
                 }
-                R.id.nav_historial -> { // ✅ NUEVO
+                R.id.nav_historial -> {
                     startActivity(Intent(this, HistorialActivity::class.java))
                     true
                 }
                 else -> false
             }
         }
-        // Seleccionar el item actual en la barra
         bottomNav.selectedItemId = R.id.nav_carrito
-
-        btnPagar.setOnClickListener {
-            val lista = CarritoManager.obtenerCarrito()
-            val total = lista.sumOf { (it.precio ?: 0.0) * it.cantidad }
-
-            val intent = Intent(this, MetodoPagoActivity::class.java)
-            intent.putExtra("TOTAL_CARRITO", total) // Enviar el total al layout de pago
-            startActivity(intent)
-        }
-
     }
 
     override fun onResume() {
         super.onResume()
-        // refrescar desde manager por si hubo cambios
         val lista = CarritoManager.obtenerCarrito().toMutableList()
         adapter.updateList(lista)
         calcularTotal(lista)
     }
 
     private fun calcularTotal(lista: List<Producto>) {
-        val total = lista.sumOf { (it.precio ?: 0.0) * it.cantidad }
+        val total = lista.sumOf { it.precio * it.cantidad }
         totalText.text = "Total: S/. ${"%.2f".format(total)}"
     }
 }
-
-

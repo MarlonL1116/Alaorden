@@ -3,6 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools">
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+
 
 
     <application
@@ -62,6 +66,7 @@
         <activity android:name=".PerfilActivity" />
         <activity android:name=".CarritoActivity" />
         <activity android:name=".HistorialActivity"
+
             android:label="@string/title_activity_historial"
             android:exported="false" />
 
@@ -71,6 +76,9 @@
             android:exported="false"
             android:label="Ubicación del Establecimiento"
             android:theme="@style/Theme.ALaOrden" />
+        <activity android:name=".AddressesActivity" />
+        <activity android:name=".EditAddressActivity" />
+
 
     </application>
 

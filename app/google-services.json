@@ -2,7 +2,7 @@
   "project_info": {
     "project_number": "626487516631",
     "project_id": "a-la-orden-8f0fe",
-    "storage_bucket": "a-la-orden-8f0fe.firebasestorage.app"
+    "storage_bucket": "a-la-orden-8f0fe.appspot.com"
   },
   "client": [
     {
@@ -12,7 +12,12 @@
           "package_name": "com.example.alaorden"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "626487516631-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyA4Jdc1jea5fI-SAUfEiKzKJS2nV-UWMfA"
@@ -20,7 +25,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "626487516631-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

@@ -6,18 +6,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.alaorden.ui.theme.ALaOrdenTheme
 
 class YapePlinActivity : AppCompatActivity() {
 
@@ -32,15 +21,20 @@ class YapePlinActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_yapeplin)
 
+        // 🔹 Referencias
         etCelular = findViewById(R.id.etCelular)
         etCodigo = findViewById(R.id.etCodigo)
         btnConfirmar = findViewById(R.id.btnConfirmar)
         tvTitulo = findViewById(R.id.tvTitulo)
 
+        // 🔹 Obtener los datos del intent
         totalCarrito = intent.getDoubleExtra("TOTAL_CARRITO", 0.0)
         metodo = intent.getStringExtra("METODO") ?: "Yape"
+
+        // 🔹 Mostrar título dinámico
         tvTitulo.text = "Pago con $metodo"
 
+        // 🔹 Validar y continuar con la confirmación
         btnConfirmar.setOnClickListener {
             val celular = etCelular.text.toString()
             val codigo = etCodigo.text.toString()
@@ -50,8 +44,10 @@ class YapePlinActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
+            // ✅ Ahora pasamos también el método de pago
             val intent = Intent(this, ConfirmacionPagoActivity::class.java)
             intent.putExtra("TOTAL_CARRITO", totalCarrito)
+            intent.putExtra("METODO_PAGO", metodo)
             startActivity(intent)
             finish()
         }
