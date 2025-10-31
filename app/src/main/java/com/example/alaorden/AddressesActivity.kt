@@ -20,6 +20,7 @@ class AddressesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_addresses)
 
+
         val selectMode = intent.getBooleanExtra("SELECT_MODE", false)
         val recycler = findViewById<androidx.recyclerview.widget.RecyclerView>(R.id.recyclerAddresses)
         recycler.layoutManager = LinearLayoutManager(this)

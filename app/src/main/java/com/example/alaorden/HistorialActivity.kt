@@ -2,7 +2,11 @@ package com.example.alaorden
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -20,6 +24,14 @@ class HistorialActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_historial)
+        val headerLayout=findViewById<LinearLayout>(R.id.header_historial)
+
+        ViewCompat.setOnApplyWindowInsetsListener(headerLayout) { view, insets ->
+            val systemBarInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            view.updatePadding(top = systemBarInsets.top)
+            WindowInsetsCompat.CONSUMED
+        }
+
 
         recyclerView = findViewById(R.id.recyclerHistorial)
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -48,6 +60,10 @@ class HistorialActivity : AppCompatActivity() {
                 }
                 R.id.nav_perfil -> {
                     startActivity(Intent(this, PerfilActivity::class.java))
+                    true
+                }
+                R.id.nav_orders -> {
+                    startActivity(Intent(this, PedidosActivity::class.java))
                     true
                 }
                 else -> false

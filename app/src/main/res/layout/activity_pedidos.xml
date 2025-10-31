@@ -1,44 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/Terciario">
+    android:background="@color/Terciario"
+    tools:context=".PedidosActivity">
 
     <LinearLayout
-        android:id="@+id/header_historial"
+        android:id="@+id/header_orders"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/header_gradient"
         android:padding="20dp"
-        android:orientation="horizontal">
+        android:orientation="vertical"
+        >
 
         <TextView
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_weight="1"
-            android:text="Historial de pedidos"
-            android:textColor="@android:color/white"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
+            android:text="Mis Pedidos"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_gravity="center_horizontal"/>
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerHistorial"
+        android:id="@+id/recyclerPedidos"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:paddingHorizontal="16dp" />
+        android:layout_height="match_parent"
+        android:layout_below="@id/header_orders"
+        android:layout_above="@id/bottom_navigation"
+        android:padding="16dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        />
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:background="@color/white"
         app:itemIconTint="@color/Primario"
         app:itemTextColor="@color/Primario"
         app:labelVisibilityMode="labeled"
         app:menu="@menu/barramenu" />
-</LinearLayout>
+
+</RelativeLayout>

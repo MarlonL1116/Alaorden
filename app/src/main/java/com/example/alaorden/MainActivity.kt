@@ -12,9 +12,15 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.cardview.widget.CardView
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.card.MaterialCardView
+import com.google.android.material.chip.Chip
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.Job
@@ -25,7 +31,8 @@ import kotlinx.coroutines.launch
 class MainActivity : AppCompatActivity() {
 
     private lateinit var tvSaludo: TextView
-    private lateinit var tvDireccionSeleccionada: TextView
+    private lateinit var cardDireccion: MaterialCardView
+    private lateinit var tvDireccionTexto: TextView
     private lateinit var recycler: RecyclerView
     private lateinit var adapter: EstablecimientoAdapter
     private lateinit var etSearch: EditText
@@ -41,16 +48,26 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         setContentView(R.layout.activity_main)
-
+        val headerLayout = findViewById<LinearLayout>(R.id.header_main)
+        // Encuentra tu layout de encabezado
+        ViewCompat.setOnApplyWindowInsetsListener(headerLayout) { view, insets ->
+            val systemBarInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            view.updatePadding(top = systemBarInsets.top)
+            WindowInsetsCompat.CONSUMED
+        }
         // Referencias UI
         tvSaludo = findViewById(R.id.tvSaludo)
-        tvDireccionSeleccionada = findViewById(R.id.tvDireccionSeleccionada)
+        tvDireccionTexto = findViewById(R.id.tvDireccionTexto)
         recycler = findViewById(R.id.recyclerEstablecimientos)
         etSearch = findViewById(R.id.etSearch)
+        cardDireccion = findViewById(R.id.cardDireccion)
+
+        val sharedPref = getSharedPreferences("LoginPrefs", MODE_PRIVATE)
+        val username = sharedPref.getString("name", "Usuario")
+        tvSaludo.text = "Hola, $username 👋"
 
         // 🔹 Configurar texto y listener
-        tvSaludo.text = "Mis Direcciones"
-        tvSaludo.setOnClickListener {
+        cardDireccion.setOnClickListener {
             val intent = Intent(this, AddressesActivity::class.java)
             intent.putExtra("SELECT_MODE", true) // modo selección
             startActivity(intent)
@@ -69,13 +86,16 @@ class MainActivity : AppCompatActivity() {
         recycler.adapter = adapter
 
         // Botones de filtro
-        val btnRestaurantes = findViewById<LinearLayout>(R.id.btnRestaurantes)
-        val btnTiendas = findViewById<LinearLayout>(R.id.btnTiendas)
-        val btnFarmacias = findViewById<LinearLayout>(R.id.btnFarmacias)
+        val btnRestaurantes = findViewById<Chip>(R.id.btnRestaurantes)
+        val btnTiendas = findViewById<Chip>(R.id.btnTiendas)
+        val btnFarmacias = findViewById<Chip>(R.id.btnFarmacias)
+        val chip_inicio = findViewById<Chip>(R.id.chip_inicio)
+
 
         btnRestaurantes.setOnClickListener { filtrarPorCategoria("restaurante") }
         btnTiendas.setOnClickListener { filtrarPorCategoria("tienda") }
         btnFarmacias.setOnClickListener { filtrarPorCategoria("farmacia") }
+        chip_inicio.setOnClickListener({ mostrarTodos() })
 
         // 🔍 Buscador con debounce
         etSearch.addTextChangedListener(object : TextWatcher {
@@ -112,12 +132,16 @@ class MainActivity : AppCompatActivity() {
                     startActivity(Intent(this, PerfilActivity::class.java))
                     true
                 }
+                R.id.nav_orders -> {
+                    startActivity(Intent(this, PedidosActivity::class.java))
+                    true
+                }
                 else -> false
             }
         }
 
         // ✅ Verificar si hay pedido activo antes de mostrar establecimientos
-        checkActiveOrder()
+        //checkActiveOrder()
         cargarEstablecimientos()
     }
 
@@ -137,55 +161,55 @@ class MainActivity : AppCompatActivity() {
                 if (addr != null) {
                     val title = addr["title"] ?: ""
                     val street = addr["street"] ?: ""
-                    tvDireccionSeleccionada.text = "Enviar a: $title - $street"
+                    tvDireccionTexto.text = "Enviar a: $title - $street"
                 } else {
-                    tvDireccionSeleccionada.text = "Enviar a: (ninguna seleccionada)"
+                    tvDireccionTexto.text = "Enviar a: (ninguna seleccionada)"
                 }
             }
             .addOnFailureListener {
-                tvDireccionSeleccionada.text = "Error al cargar dirección"
+                tvDireccionTexto.text = "Error al cargar dirección"
             }
     }
 
     // ============================================================
     // ✅ Verificar pedido activo (TICKET)
     // ============================================================
-    private fun checkActiveOrder() {
-        val uid = FirebaseAuth.getInstance().currentUser?.uid ?: return
-        val db = FirebaseFirestore.getInstance()
-
-        // 🔹 Busca pedidos activos del usuario con estado received o in_transit
-        db.collection("users").document(uid).collection("orders")
-            .whereIn("status", listOf("received", "in_transit"))
-            .addSnapshotListener { snapshots, e ->
-                if (e != null) return@addSnapshotListener
-
-                val layoutPedidoActivo = findViewById<LinearLayout>(R.id.layoutPedidoActivo)
-
-                if (snapshots != null && !snapshots.isEmpty) {
-                    // ✅ Mostrar pedido activo
-                    val pedidoDoc = snapshots.documents.first()
-                    val pedido = pedidoDoc.toObject(Order::class.java)
-
-                    layoutPedidoActivo.visibility = View.VISIBLE
-
-                    findViewById<TextView>(R.id.tvPedidoTitulo).text = "Pedido en curso 🚚"
-                    findViewById<TextView>(R.id.tvPedidoEstado).text =
-                        "Estado: " + when (pedido?.status) {
-                            "received" -> "Se está preparando su orden"
-                            "in_transit" -> "En camino"
-                            else -> "Desconocido"
-                        }
-                    findViewById<TextView>(R.id.tvPedidoEstablecimiento).text =
-                        pedido?.establecimientoName ?: "Producto"
-                    findViewById<TextView>(R.id.tvPedidoTotal).text =
-                        "Total: S/%.2f".format(pedido?.total ?: 0.0)
-                } else {
-                    // 🔹 Si no hay pedido activo, ocultamos el bloque
-                    layoutPedidoActivo.visibility = View.GONE
-                }
-            }
-    }
+//    private fun checkActiveOrder() {
+//        val uid = FirebaseAuth.getInstance().currentUser?.uid ?: return
+//        val db = FirebaseFirestore.getInstance()
+//
+//        // 🔹 Busca pedidos activos del usuario con estado received o in_transit
+//        db.collection("users").document(uid).collection("orders")
+//            .whereIn("status", listOf("received", "in_transit"))
+//            .addSnapshotListener { snapshots, e ->
+//                if (e != null) return@addSnapshotListener
+//
+//                val layoutPedidoActivo = findViewById<LinearLayout>(R.id.layoutPedidoActivo)
+//
+//                if (snapshots != null && !snapshots.isEmpty) {
+//                    // ✅ Mostrar pedido activo
+//                    val pedidoDoc = snapshots.documents.first()
+//                    val pedido = pedidoDoc.toObject(Order::class.java)
+//
+//                    layoutPedidoActivo.visibility = View.VISIBLE
+//
+//                    findViewById<TextView>(R.id.tvPedidoTitulo).text = "Pedido en curso 🚚"
+//                    findViewById<TextView>(R.id.tvPedidoEstado).text =
+//                        "Estado: " + when (pedido?.status) {
+//                            "received" -> "Se está preparando su orden"
+//                            "in_transit" -> "En camino"
+//                            else -> "Desconocido"
+//                        }
+//                    findViewById<TextView>(R.id.tvPedidoEstablecimiento).text =
+//                        pedido?.establecimientoName ?: "Producto"
+//                    findViewById<TextView>(R.id.tvPedidoTotal).text =
+//                        "Total: S/%.2f".format(pedido?.total ?: 0.0)
+//                } else {
+//                    // 🔹 Si no hay pedido activo, ocultamos el bloque
+//                    layoutPedidoActivo.visibility = View.GONE
+//                }
+//            }
+//    }
 
     // ============================================================
     // 🔹 Cargar establecimientos desde Firestore

@@ -3,9 +3,13 @@ package com.example.alaorden
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -24,6 +28,12 @@ class PerfilActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_perfil)
+        val headerLayout = findViewById<LinearLayout>(R.id.header_perfil)
+         ViewCompat.setOnApplyWindowInsetsListener(headerLayout) { view, insets ->
+                 val systemBarInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+                 view.updatePadding(top = systemBarInsets.top)
+                 WindowInsetsCompat.CONSUMED
+             }
 
         txtNombre = findViewById(R.id.txtNombre)
         txtTelefono = findViewById(R.id.txtTelefono)
@@ -82,6 +92,10 @@ class PerfilActivity : AppCompatActivity() {
                 }
                 R.id.nav_historial -> { // ✅ NUEVO
                     startActivity(Intent(this, HistorialActivity::class.java))
+                    true
+                }
+                R.id.nav_orders -> {
+                    startActivity(Intent(this, PedidosActivity::class.java))
                     true
                 }
                 else -> false

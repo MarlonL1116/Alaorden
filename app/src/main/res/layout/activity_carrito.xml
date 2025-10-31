@@ -11,9 +11,10 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:padding="16dp"
-        android:background="@color/Primario"
-        android:elevation="4dp">
+        android:elevation="4dp"
+        android:id="@+id/header_carrito"
+        android:background="@drawable/header_gradient"
+        android:padding="20dp">
 
         <TextView
             android:layout_width="0dp"
@@ -201,10 +202,9 @@
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?android:attr/windowBackground"
+        android:background="@color/white"
         app:itemIconTint="@color/Primario"
-        app:itemTextColor="@color/PrimarioOscuro"
+        app:itemTextColor="@color/Primario"
         app:labelVisibilityMode="labeled"
-        app:menu="@menu/barramenu"
-        android:elevation="8dp"/>
+        app:menu="@menu/barramenu" />
 </LinearLayout>

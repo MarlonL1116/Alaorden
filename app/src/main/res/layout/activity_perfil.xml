@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/Terciario"
     android:fillViewport="true">
-
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/Terciario"
+        android:fillViewport="true">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -13,9 +17,10 @@
 
 
         <LinearLayout
+            android:id="@+id/header_perfil"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/Primario"
+            android:background="@drawable/header_gradient"
             android:orientation="vertical"
             android:paddingTop="24dp"
             android:paddingBottom="24dp"
@@ -41,11 +46,13 @@
             android:layout_marginEnd="16dp"
             android:layout_marginTop="0dp"
             app:cardCornerRadius="16dp"
-            app:cardElevation="4dp">
+            app:cardElevation="4dp"
+            >
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/Terciario"
                 android:gravity="center_horizontal"
                 android:orientation="vertical"
                 android:padding="20dp">
@@ -61,7 +68,8 @@
                         android:background="@drawable/circulo"
                         android:padding="4dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/ic_person" />
+                        android:src="@drawable/ic_person"
+                        app:tint="@color/Terciario" />
                 </FrameLayout>
 
                 <TextView
@@ -103,11 +111,12 @@
                     android:text="Editar Perfil"
                     android:textColor="@android:color/white"
                     android:textStyle="bold" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:divider="@drawable/menu_divider"
+                    android:orientation="vertical"
                     android:showDividers="middle">
 
 
@@ -134,73 +143,6 @@
                             android:layout_marginStart="16dp"
                             android:layout_weight="1"
                             android:text="Configuracion"
-                            android:textColor="@color/Primario"
-                            android:textSize="16sp" />
-
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:src="@drawable/ic_chevron_right"
-                            app:tint="@color/plomo" />
-                    </LinearLayout>
-
-
-                    <LinearLayout
-                        android:id="@+id/btnOrders"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="?attr/selectableItemBackground"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:padding="16dp">
-
-                        <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:src="@drawable/ic_tienda"
-                            app:tint="@color/Primario" />
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
-                            android:layout_weight="1"
-                            android:text="Mis pedidos"
-                            android:textColor="@color/Primario"
-                            android:textSize="16sp" />
-
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:src="@drawable/ic_chevron_right"
-                            app:tint="@color/plomo" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/btnAddress"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="?attr/selectableItemBackground"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:padding="16dp">
-
-                        <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:src="@drawable/ic_location_on"
-                            app:tint="@color/Primario" />
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
-                            android:layout_weight="1"
-                            android:text="Direccion"
                             android:textColor="@color/Primario"
                             android:textSize="16sp" />
 
@@ -286,23 +228,23 @@
             android:id="@+id/btnCerrarSesion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            android:layout_margin="10dp"
             android:background="@drawable/botondegradado"
-            android:padding="16dp"
+            android:padding="12dp"
             android:text="Cerrar Sesion"
             android:textColor="@color/Terciario"
             android:textStyle="bold"
             android:textSize="16sp" />
-
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottom_navigation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?android:attr/windowBackground"
-            app:itemIconTint="@color/Primario"
-            app:itemTextColor="@color/PrimarioOscuro"
-            app:labelVisibilityMode="labeled"
-            app:menu="@menu/barramenu"
-            android:elevation="8dp"/>
     </LinearLayout>
-</ScrollView>
+    </ScrollView>
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        app:itemIconTint="@color/Primario"
+        app:itemTextColor="@color/Primario"
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/barramenu" />
+</RelativeLayout>
