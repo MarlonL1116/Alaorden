@@ -62,10 +62,7 @@ class HistorialActivity : AppCompatActivity() {
                     startActivity(Intent(this, PerfilActivity::class.java))
                     true
                 }
-                R.id.nav_orders -> {
-                    startActivity(Intent(this, PedidosActivity::class.java))
-                    true
-                }
+
                 else -> false
             }
         }

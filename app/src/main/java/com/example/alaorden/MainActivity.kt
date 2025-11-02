@@ -132,16 +132,13 @@ class MainActivity : AppCompatActivity() {
                     startActivity(Intent(this, PerfilActivity::class.java))
                     true
                 }
-                R.id.nav_orders -> {
-                    startActivity(Intent(this, PedidosActivity::class.java))
-                    true
-                }
                 else -> false
             }
         }
 
         // ✅ Verificar si hay pedido activo antes de mostrar establecimientos
-        //checkActiveOrder()
+
+        checkActiveOrder()
         cargarEstablecimientos()
     }
 
@@ -174,42 +171,42 @@ class MainActivity : AppCompatActivity() {
     // ============================================================
     // ✅ Verificar pedido activo (TICKET)
     // ============================================================
-//    private fun checkActiveOrder() {
-//        val uid = FirebaseAuth.getInstance().currentUser?.uid ?: return
-//        val db = FirebaseFirestore.getInstance()
-//
-//        // 🔹 Busca pedidos activos del usuario con estado received o in_transit
-//        db.collection("users").document(uid).collection("orders")
-//            .whereIn("status", listOf("received", "in_transit"))
-//            .addSnapshotListener { snapshots, e ->
-//                if (e != null) return@addSnapshotListener
-//
-//                val layoutPedidoActivo = findViewById<LinearLayout>(R.id.layoutPedidoActivo)
-//
-//                if (snapshots != null && !snapshots.isEmpty) {
-//                    // ✅ Mostrar pedido activo
-//                    val pedidoDoc = snapshots.documents.first()
-//                    val pedido = pedidoDoc.toObject(Order::class.java)
-//
-//                    layoutPedidoActivo.visibility = View.VISIBLE
-//
-//                    findViewById<TextView>(R.id.tvPedidoTitulo).text = "Pedido en curso 🚚"
-//                    findViewById<TextView>(R.id.tvPedidoEstado).text =
-//                        "Estado: " + when (pedido?.status) {
-//                            "received" -> "Se está preparando su orden"
-//                            "in_transit" -> "En camino"
-//                            else -> "Desconocido"
-//                        }
-//                    findViewById<TextView>(R.id.tvPedidoEstablecimiento).text =
-//                        pedido?.establecimientoName ?: "Producto"
-//                    findViewById<TextView>(R.id.tvPedidoTotal).text =
-//                        "Total: S/%.2f".format(pedido?.total ?: 0.0)
-//                } else {
-//                    // 🔹 Si no hay pedido activo, ocultamos el bloque
-//                    layoutPedidoActivo.visibility = View.GONE
-//                }
-//            }
-//    }
+    private fun checkActiveOrder() {
+        val uid = FirebaseAuth.getInstance().currentUser?.uid ?: return
+        val db = FirebaseFirestore.getInstance()
+
+        // 🔹 Busca pedidos activos del usuario con estado received o in_transit
+        db.collection("users").document(uid).collection("orders")
+            .whereIn("status", listOf("received", "in_transit"))
+            .addSnapshotListener { snapshots, e ->
+                if (e != null) return@addSnapshotListener
+
+                val layoutPedidoActivo = findViewById<LinearLayout>(R.id.layoutPedidoActivo)
+
+                if (snapshots != null && !snapshots.isEmpty) {
+                    // ✅ Mostrar pedido activo
+                    val pedidoDoc = snapshots.documents.first()
+                    val pedido = pedidoDoc.toObject(Order::class.java)
+
+                    layoutPedidoActivo.visibility = View.VISIBLE
+
+                    findViewById<TextView>(R.id.tvPedidoTitulo).text = "Pedido en curso 🚚"
+                    findViewById<TextView>(R.id.tvPedidoEstado).text =
+                        "Estado: " + when (pedido?.status) {
+                            "received" -> "Se está preparando su orden"
+                            "in_transit" -> "En camino"
+                            else -> "Desconocido"
+                        }
+                    findViewById<TextView>(R.id.tvPedidoEstablecimiento).text =
+                        pedido?.establecimientoName ?: "Producto"
+                    findViewById<TextView>(R.id.tvPedidoTotal).text =
+                        "Total: S/%.2f".format(pedido?.total ?: 0.0)
+                } else {
+                    // 🔹 Si no hay pedido activo, ocultamos el bloque
+                    layoutPedidoActivo.visibility = View.GONE
+                }
+            }
+    }
 
     // ============================================================
     // 🔹 Cargar establecimientos desde Firestore
