@@ -6,10 +6,15 @@ import android.location.Location
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.firebase.Timestamp
@@ -39,7 +44,13 @@ class EditAddressActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_address)
-
+        // Encuentra tu layout de encabezado
+        val headerLayout = findViewById<RelativeLayout>(R.id.header_carrito) // Usa el ID de tu header
+        ViewCompat.setOnApplyWindowInsetsListener(headerLayout) { view, insets ->
+            val systemBarInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            view.updatePadding(top = systemBarInsets.top)
+            WindowInsetsCompat.CONSUMED
+        }
         etTitle = findViewById(R.id.etTitle)
         etStreet = findViewById(R.id.etStreet)
         etNotes = findViewById(R.id.etNotes)

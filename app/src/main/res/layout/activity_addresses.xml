@@ -1,21 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/Terciario"
+    tools:context=".AddressesActivity">
+
+    <LinearLayout
+        android:id="@+id/header_carrito"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/header_gradient"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            >
+
+            <ImageView
+
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_location_on"
+                app:tint="@color/white"
+                android:layout_marginEnd="12dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mis Direcciones"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+</LinearLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnAddAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="Añade nueva direccion"
+        app:icon="@drawable/ic_add"
+        app:iconGravity="textStart"
+        app:backgroundTint="@color/Primario"
+        app:cornerRadius="8dp"
+        android:paddingVertical="12dp"
+        android:textColor="@color/white"
+        android:textSize="16sp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerAddresses"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="12dp" />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingHorizontal="12dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabAddAddress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="16dp"
-        android:src="@drawable/ic_add"
-        android:contentDescription="Agregar dirección" />
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</LinearLayout>

@@ -2,10 +2,15 @@ package com.example.alaorden
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.button.MaterialButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -20,7 +25,13 @@ class AddressesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_addresses)
 
-
+        // Encuentra tu layout de encabezado
+        val headerLayout = findViewById<LinearLayout>(R.id.header_carrito) // Usa el ID de tu header
+        ViewCompat.setOnApplyWindowInsetsListener(headerLayout) { view, insets ->
+            val systemBarInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            view.updatePadding(top = systemBarInsets.top)
+            WindowInsetsCompat.CONSUMED
+        }
         val selectMode = intent.getBooleanExtra("SELECT_MODE", false)
         val recycler = findViewById<androidx.recyclerview.widget.RecyclerView>(R.id.recyclerAddresses)
         recycler.layoutManager = LinearLayoutManager(this)
@@ -44,7 +55,7 @@ class AddressesActivity : AppCompatActivity() {
 
         recycler.adapter = adapter
 
-        findViewById<FloatingActionButton>(R.id.fabAddAddress).setOnClickListener {
+        findViewById<MaterialButton>(R.id.btnAddAddress).setOnClickListener {
             startActivity(Intent(this, EditAddressActivity::class.java))
         }
 

@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.button.MaterialButton
 
 class AddressAdapter(
     private val items: List<Address>,
@@ -16,10 +17,10 @@ class AddressAdapter(
 
     class VH(item: View) : RecyclerView.ViewHolder(item) {
         val tvTitle: TextView = item.findViewById(R.id.tvAddressTitle)
-        val tvStreet: TextView = item.findViewById(R.id.tvStreet)
+        val tvCalle: TextView = item.findViewById(R.id.tvCalle)
         val tvNotes: TextView = item.findViewById(R.id.tvNotes)
-        val btnEdit: ImageView = item.findViewById(R.id.btnEditAddress)
-        val btnDelete: ImageView = item.findViewById(R.id.btnDeleteAddress)
+        val btnEdit: MaterialButton = item.findViewById(R.id.btnEditAddress)
+        val btnDelete: MaterialButton = item.findViewById(R.id.btnDeleteAddress)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
@@ -30,7 +31,7 @@ class AddressAdapter(
     override fun onBindViewHolder(holder: VH, position: Int) {
         val a = items[position]
         holder.tvTitle.text = a.title
-        holder.tvStreet.text = a.street
+        holder.tvCalle.text = a.street
         holder.tvNotes.text = a.notes ?: ""
 
         holder.btnEdit.setOnClickListener { onEdit(a) }

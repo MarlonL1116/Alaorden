@@ -1,60 +1,163 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:background="@color/Terciario"
+    tools:context=".EditAddressActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottom_button_bar"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <RelativeLayout
+                android:id="@+id/header_carrito"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:text="Añadir direccion"
+                    android:textColor="@color/PrimarioOscuro"
+                    android:textSize="28sp"
+                    android:textStyle="bold" />
+
+                <ImageButton
+                    android:id="@+id/btnClose"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="Close"
+                    android:src="@drawable/ic_delete"
+                    app:tint="@color/PrimarioOscuro" />
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Address Title"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/etTitle"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_card"
+                android:hint="e.g., Home, Office, Gym"
+                android:paddingHorizontal="16dp"
+                android:singleLine="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Street Address"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/etStreet"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_card"
+                android:hint="e.g., Main Street 123"
+                android:paddingHorizontal="16dp"
+                android:singleLine="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Details / Reference"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/etNotes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_card"
+                android:gravity="top|start"
+                android:hint="e.g., Red house, ring doorbell twice"
+                android:inputType="textMultiLine"
+                android:minLines="4"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="12dp" />
+
+            <EditText
+                android:id="@+id/etLat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Latitud"
+                android:visibility="gone" />
+
+            <EditText
+                android:id="@+id/etLng"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Longitud"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/btnGetLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Obtener ubicación actual"
+                android:visibility="gone" />
+
+        </LinearLayout>
+    </ScrollView>
 
     <LinearLayout
-        android:orientation="vertical"
+        android:id="@+id/bottom_button_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/Terciario"
+        android:orientation="horizontal"
+        android:padding="16dp">
 
-        <EditText
-            android:id="@+id/etTitle"
-            android:hint="Título (Casa, Trabajo)"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnCancelAddress"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:text="Cancelar"
+            app:backgroundTint="@color/PrimarioOscuro"
+            app:cornerRadius="12dp" />
 
-        <EditText
-            android:id="@+id/etStreet"
-            android:hint="Dirección"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp" />
-
-        <EditText
-            android:id="@+id/etNotes"
-            android:hint="Notas (opcional)"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp" />
-
-        <EditText
-            android:id="@+id/etLat"
-            android:hint="Latitud"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp" />
-
-        <EditText
-            android:id="@+id/etLng"
-            android:hint="Longitud"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp" />
-
-        <Button
-            android:id="@+id/btnGetLocation"
-            android:text="Obtener ubicación actual"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp" />
-
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnSaveAddress"
-            android:text="Guardar dirección"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp" />
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:text="Añadir"
+            app:backgroundTint="@color/Primario"
+            app:cornerRadius="12dp" />
     </LinearLayout>
-</ScrollView>
+
+</RelativeLayout>
