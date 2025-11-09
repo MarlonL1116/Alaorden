@@ -35,16 +35,6 @@
                     android:textSize="28sp"
                     android:textStyle="bold" />
 
-                <ImageButton
-                    android:id="@+id/btnClose"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:contentDescription="Close"
-                    android:src="@drawable/ic_delete"
-                    app:tint="@color/PrimarioOscuro" />
             </RelativeLayout>
 
             <TextView
@@ -105,7 +95,13 @@
                 android:minLines="4"
                 android:paddingHorizontal="16dp"
                 android:paddingVertical="12dp" />
-
+            <Button
+                android:id="@+id/btnGetLocation"
+                android:text="Obtener ubicación actual"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:visibility="gone"/>
             <EditText
                 android:id="@+id/etLat"
                 android:layout_width="match_parent"
@@ -118,13 +114,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Longitud"
-                android:visibility="gone" />
-
-            <Button
-                android:id="@+id/btnGetLocation"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Obtener ubicación actual"
                 android:visibility="gone" />
 
         </LinearLayout>
@@ -140,7 +129,7 @@
         android:padding="16dp">
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnCancelAddress"
+            android:id="@+id/btnCancel"
             android:layout_width="0dp"
             android:layout_height="56dp"
             android:layout_marginStart="8dp"
