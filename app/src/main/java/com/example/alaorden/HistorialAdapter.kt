@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class HistorialAdapter(private val lista: List<Pedido>) :
+class HistorialAdapter(private val lista: List<Pedido>, private val onItemClick: (String) -> Unit) :
     RecyclerView.Adapter<HistorialAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -28,6 +28,7 @@ class HistorialAdapter(private val lista: List<Pedido>) :
         holder.txtProductos.text = pedido.productos.joinToString("\n") {
             "- ${it.nombre} (x${it.cantidad})"
         }
+        holder.itemView.setOnClickListener { onItemClick(pedido.id) }
     }
 
     override fun getItemCount(): Int = lista.size

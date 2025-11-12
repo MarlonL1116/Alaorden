@@ -40,7 +40,7 @@ class EstablecimientoAdapter(
             .error(R.drawable.ic_launcher_background)
             .into(holder.imgEstablecimiento)
 
-        // 👉 Click en todo el card para abrir los productos del establecimiento
+//         Click en todo el card para abrir los productos del establecimiento
         holder.itemView.setOnClickListener {
             onItemClick(est)
         }
@@ -66,14 +66,4 @@ class EstablecimientoAdapter(
         notifyDataSetChanged()
     }
 
-    fun filter(query: String) {
-        lista = if (query.isEmpty()) {
-            listaOriginal
-        } else {
-            listaOriginal.filter {
-                it.name.contains(query, ignoreCase = true)
-            }
-        }
-        notifyDataSetChanged()
-    }
 }

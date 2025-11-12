@@ -66,13 +66,13 @@ class MainActivity : AppCompatActivity() {
         val username = sharedPref.getString("name", "Usuario")
         tvSaludo.text = "Hola, $username 👋"
 
-        // 🔹 Configurar texto y listener
+        // Asigna un OnClickListener a la tarjeta de dirección
         cardDireccion.setOnClickListener {
             val intent = Intent(this, AddressesActivity::class.java)
             intent.putExtra("SELECT_MODE", true) // modo selección
             startActivity(intent)
         }
-
+//  CONFIGURACIÓN DEL RECYCLERVIEW
         recycler.layoutManager = LinearLayoutManager(this)
         adapter = EstablecimientoAdapter(listaFiltrada) { est ->
             if (est.id.isNotEmpty()) {
@@ -97,7 +97,7 @@ class MainActivity : AppCompatActivity() {
         btnFarmacias.setOnClickListener { filtrarPorCategoria("farmacia") }
         chip_inicio.setOnClickListener({ mostrarTodos() })
 
-        // 🔍 Buscador con debounce
+        // Buscador con debounce
         etSearch.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {

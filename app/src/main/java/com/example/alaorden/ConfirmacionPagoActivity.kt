@@ -80,7 +80,7 @@ class ConfirmacionPagoActivity : AppCompatActivity() {
                 }
 
                 val primerProducto = carrito.firstOrNull()
-                val productoNombre = primerProducto?.nombre ?: "Producto sin nombre"
+                val nombreEstablecimiento = primerProducto?.nombreEstablecimiento ?: "Producto sin nombre"
                 val establecimientoId = primerProducto?.idEstablecimiento ?: "sin_id"
 
                 // ✅ Crear objeto Order (ticket actual)
@@ -88,7 +88,7 @@ class ConfirmacionPagoActivity : AppCompatActivity() {
                     id = "",
                     userId = uid,
                     establecimientoId = establecimientoId,
-                    establecimientoName = productoNombre,
+                    establecimientoName = nombreEstablecimiento,
                     direccion = OrderAddress(
                         title = direccion["title"].toString(),
                         street = direccion["street"].toString(),

@@ -3,6 +3,7 @@ package com.example.alaorden
 import android.content.Intent
 import android.os.Bundle
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -36,7 +37,19 @@ class HistorialActivity : AppCompatActivity() {
         recyclerView = findViewById(R.id.recyclerHistorial)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        adapter = HistorialAdapter(pedidosList)
+        adapter = HistorialAdapter(pedidosList){pedidoId->
+// ----- AÑADE ESTA VALIDACIÓN -----
+            if (pedidoId.isNullOrEmpty()) {
+                Toast.makeText(this, "Error: El ID del pedido es inválido.", Toast.LENGTH_SHORT).show()
+                return@HistorialAdapter
+            }
+            // -------------------------------------
+
+            // Si el ID es válido, continúa
+            val intent = Intent(this, HistorialDetalleActivity::class.java)
+            intent.putExtra("PEDIDO_ID", pedidoId)
+            startActivity(intent)
+        }
         recyclerView.adapter = adapter
 
         cargarHistorial()
@@ -87,7 +100,7 @@ class HistorialActivity : AppCompatActivity() {
                 adapter.notifyDataSetChanged()
             }
             .addOnFailureListener {
-                // puedes agregar un Toast si deseas avisar que no cargó
+
             }
     }
 }

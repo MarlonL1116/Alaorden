@@ -22,4 +22,5 @@
     <string name="quitar_producto">Quitar producto</string>
     <string name="agregar_producto">Agregar producto</string>
     <string name="title_activity_pedidos">PedidosActivity</string>
+    <string name="title_activity_historial_detalle">HistorialDetalleActivity</string>
 </resources>

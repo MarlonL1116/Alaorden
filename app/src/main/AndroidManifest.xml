@@ -16,6 +16,11 @@
         android:roundIcon="@mipmap/iconalaorden_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ALaOrden">
+        <activity
+            android:name=".HistorialDetalleActivity"
+            android:exported="false"
+            android:label="@string/title_activity_historial_detalle"
+            android:theme="@style/Theme.ALaOrden" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -25,8 +30,7 @@
             android:name=".PedidosActivity"
             android:exported="false"
             android:label="@string/title_activity_pedidos"
-            android:theme="@style/Theme.ALaOrden"
-            />
+            android:theme="@style/Theme.ALaOrden" />
         <activity
             android:name=".YapePlinActivity"
             android:exported="false"
