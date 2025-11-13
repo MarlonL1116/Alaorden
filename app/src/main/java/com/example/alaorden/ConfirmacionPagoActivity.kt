@@ -71,6 +71,29 @@ class ConfirmacionPagoActivity : AppCompatActivity() {
             return
         }
 
+        val primerProducto = carrito.first()
+        val establecimientoId = primerProducto.idEstablecimiento
+
+        // Consultar el nombre del establecimiento usando su ID
+        db.collection("establecimientos").document(establecimientoId).get()
+            .addOnSuccessListener { docEstablecimiento ->
+                // Obtenemos el nombre real (o ponemos uno por defecto si falla)
+                val nombreRealEstablecimiento = docEstablecimiento.getString("name") ?: "Establecimiento"
+
+                // AHORA procedemos a buscar la dirección del usuario y guardar el pedido
+                guardarPedidoConNombre(uid, carrito, establecimientoId, nombreRealEstablecimiento)
+            }
+            .addOnFailureListener {
+                // Si falla la conexión, usamos un nombre genérico pero guardamos el pedido igual
+                guardarPedidoConNombre(uid, carrito, establecimientoId, "Establecimiento (Sin nombre)")
+            }
+    }
+
+    private fun guardarPedidoConNombre(
+        uid: String,
+        carrito: List<Producto>,
+        establecimientoId: String,
+        nombreEstablecimiento: String     ) {
         db.collection("users").document(uid).get()
             .addOnSuccessListener { docUser ->
                 val direccion = docUser.get("selectedAddress") as? Map<*, *>
@@ -79,11 +102,7 @@ class ConfirmacionPagoActivity : AppCompatActivity() {
                     return@addOnSuccessListener
                 }
 
-                val primerProducto = carrito.firstOrNull()
-                val nombreEstablecimiento = primerProducto?.nombreEstablecimiento ?: "Producto sin nombre"
-                val establecimientoId = primerProducto?.idEstablecimiento ?: "sin_id"
-
-                // ✅ Crear objeto Order (ticket actual)
+                //  Crear objeto Order con el nombre CORRECTO
                 val order = Order(
                     id = "",
                     userId = uid,
@@ -116,15 +135,14 @@ class ConfirmacionPagoActivity : AppCompatActivity() {
 
                 order.id = orderRef.id
 
-                // 🔹 Guardar pedido activo (ticket)
                 orderRef.set(order)
                     .addOnSuccessListener {
-                        // 🔹 Crear copia en historial con modelo Pedido
+                        // Guardar también en historial
                         val pedido = Pedido(
                             id = order.id,
                             idUsuario = order.userId,
                             establecimientoId = order.establecimientoId,
-                            nombreEstablecimiento = order.establecimientoName,
+                            nombreEstablecimiento = order.establecimientoName, // ✅ Nombre correcto
                             total = order.total,
                             productos = carrito,
                             fecha = order.createdAt
@@ -137,20 +155,12 @@ class ConfirmacionPagoActivity : AppCompatActivity() {
                             .set(pedido)
                             .addOnSuccessListener {
                                 CarritoManager.vaciarCarrito()
-
                                 tvMensajeConfirmacion.text = "PAGO EXITOSO CON $metodoPago"
                                 tvNumeroPedido.text = "#${order.id.take(6)}"
                                 tvFechaPedido.text = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
                                 Toast.makeText(this, "Pedido agregado al historial ✅", Toast.LENGTH_SHORT).show()
                             }
-                            .addOnFailureListener { e ->
-                                Toast.makeText(this, "Error al guardar en historial: ${e.message}", Toast.LENGTH_LONG).show()
-                            }
-                    }
-                    .addOnFailureListener { e ->
-                        Toast.makeText(this, "Error al crear pedido: ${e.message}", Toast.LENGTH_LONG).show()
                     }
             }
     }
-
 }
